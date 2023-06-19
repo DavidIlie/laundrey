@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.3",
+    "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.6",
-    "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-toast": "^1.1.4",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
@@ -26,19 +26,21 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.44.3",
     "tailwindcss": "^3.3.2",
-    "tailwindcss-animate": "^1.0.6",
-    "react-hook-form": "^7.45.0"
+    "tailwindcss-animate": "^1.0.6"
   },
   "devDependencies": {
     "@laundrey/eslint-config": "0.1.0",
     "@laundrey/tailwind-config": "0.1.0",
-    "react-hook-form": "^7.45.0",
+    "@tanstack/react-table": "^8.9.2",
     "@types/react": "^18.2.11",
     "@types/react-dom": "^18.2.4",
+    "date-fns": "^2.30.0",
     "eslint": "^8.42.0",
     "postcss": "^8.4.24",
     "react": "18.2.0",
+    "react-day-picker": "^8.7.1",
     "react-dom": "18.2.0",
     "tailwindcss": "^3.3.2",
     "tailwindcss-animate": "^1.0.6",
@@ -100,11 +102,32 @@
       "avatar": [
         "dist/avatar.d.ts"
       ],
+      "calendar": [
+        "dist/calendar.d.ts"
+      ],
+      "command": [
+        "dist/command.d.ts"
+      ],
+      "dialog": [
+        "dist/dialog.d.ts"
+      ],
       "dropdown-menu": [
         "dist/dropdown-menu.d.ts"
       ],
+      "input": [
+        "dist/input.d.ts"
+      ],
+      "label": [
+        "dist/label.d.ts"
+      ],
       "popover": [
         "dist/popover.d.ts"
+      ],
+      "select": [
+        "dist/select.d.ts"
+      ],
+      "tabs": [
+        "dist/tabs.d.ts"
       ],
       "toaster": [
         "dist/toaster.d.ts"
@@ -115,14 +138,29 @@
       "button": [
         "dist/button.d.ts"
       ],
+      "icons": [
+        "dist/icons.d.ts"
+      ],
+      "card": [
+        "dist/card.d.ts"
+      ],
+      "sheet": [
+        "dist/sheet.d.ts"
+      ],
+      "scroll-area": [
+        "dist/scroll-area.d.ts"
+      ],
       "form": [
         "dist/form.d.ts"
       ],
-      "input": [
-        "dist/input.d.ts"
+      "data-table": [
+        "dist/data-table.d.ts"
       ],
-      "label": [
-        "dist/label.d.ts"
+      "table": [
+        "dist/table.d.ts"
+      ],
+      "checkbox": [
+        "dist/checkbox.d.ts"
       ]
     }
   }

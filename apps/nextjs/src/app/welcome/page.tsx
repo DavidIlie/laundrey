@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 import { prisma } from "@laundrey/db";
 
-import NewUserForm from "./components/NewUserForm";
+import NewUserForm from "./NewUserForm";
 
 export const metadata: Metadata = {
    title: "Welcome",
