@@ -18,11 +18,13 @@ import {
    FormMessage,
 } from "@laundrey/ui/form";
 import { Input } from "@laundrey/ui/input";
+import { useToast } from "@laundrey/ui/use-toast";
 
 import { api } from "~/trpc/server";
 
 const NewUserForm: React.FC = () => {
    const form = useZodForm({ schema: newAdminUserValidator });
+   const { toast } = useToast();
 
    return (
       <>
@@ -33,7 +35,14 @@ const NewUserForm: React.FC = () => {
                      const mutation = await api.user.createFirstUser.mutate(
                         values,
                      );
-                     if (mutation instanceof TRPCError) alert("error");
+                     if (mutation instanceof TRPCError)
+                        return toast({
+                           variant: "destructive",
+                           title: "Uh oh! Something went wrong.",
+                           description:
+                              "There was a problem with your request.",
+                        });
+                     form.reset();
                      redirect("/");
                   },
                )}
