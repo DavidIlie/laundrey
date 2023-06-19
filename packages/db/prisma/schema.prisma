@@ -1,0 +1,20 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id             String    @id @default(uuid())
+    username       String
+    image          String?
+    registered     DateTime  @default(now())
+    isAdmin        Boolean   @default(false)
+    password       String
+    tokenLifecycle Int       @default(1)
+    lastLogin      DateTime?
+}

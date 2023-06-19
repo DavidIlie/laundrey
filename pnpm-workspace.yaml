@@ -1,0 +1,7 @@
+packages:
+   - "apps/*"
+   - "packages/db"
+   - "packages/api"
+   - "packages/config/eslint"
+   - "packages/config/tailwind"
+   - "packages/ui"
