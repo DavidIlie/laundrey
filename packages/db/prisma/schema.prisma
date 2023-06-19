@@ -10,7 +10,9 @@ datasource db {
 
 model User {
     id             String    @id @default(uuid())
+    name           String
     username       String
+    email          String
     image          String?
     registered     DateTime  @default(now())
     isAdmin        Boolean   @default(false)

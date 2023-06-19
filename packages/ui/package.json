@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.3",
+    "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-toast": "^1.1.4",
@@ -26,11 +27,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.3.2",
-    "tailwindcss-animate": "^1.0.6"
+    "tailwindcss-animate": "^1.0.6",
+    "react-hook-form": "^7.45.0"
   },
   "devDependencies": {
     "@laundrey/eslint-config": "0.1.0",
     "@laundrey/tailwind-config": "0.1.0",
+    "react-hook-form": "^7.45.0",
     "@types/react": "^18.2.11",
     "@types/react-dom": "^18.2.4",
     "eslint": "^8.42.0",
@@ -56,13 +59,25 @@
       "import": "./dist/dropdown-menu.mjs",
       "types": "./dist/dropdown-menu.d.ts"
     },
-    "./toaster": {
-      "import": "./dist/toaster.mjs",
-      "types": "./dist/toaster.d.ts"
+    "./form": {
+      "import": "./dist/form.mjs",
+      "types": "./dist/form.d.ts"
+    },
+    "./input": {
+      "import": "./dist/input.mjs",
+      "types": "./dist/input.d.ts"
+    },
+    "./label": {
+      "import": "./dist/label.mjs",
+      "types": "./dist/label.d.ts"
     },
     "./popover": {
       "import": "./dist/popover.mjs",
       "types": "./dist/popover.d.ts"
+    },
+    "./toaster": {
+      "import": "./dist/toaster.mjs",
+      "types": "./dist/toaster.d.ts"
     },
     "./use-toast": {
       "import": "./dist/use-toast.mjs",
@@ -99,6 +114,15 @@
       ],
       "button": [
         "dist/button.d.ts"
+      ],
+      "form": [
+        "dist/form.d.ts"
+      ],
+      "input": [
+        "dist/input.d.ts"
+      ],
+      "label": [
+        "dist/label.d.ts"
       ]
     }
   }

@@ -5,8 +5,11 @@ import type { Options } from "tsup";
 const client = [
    "./src/avatar.tsx",
    "./src/dropdown-menu.tsx",
-   "./src/toaster.tsx",
+   "./src/form.tsx",
+   "./src/input.tsx",
+   "./src/label.tsx",
    "./src/popover.tsx",
+   "./src/toaster.tsx",
    "./src/use-toast.tsx",
 ];
 

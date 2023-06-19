@@ -1,8 +1,11 @@
-import { api } from "~/trpc/server";
+import { redirect } from "next/navigation";
+
+import { prisma } from "@laundrey/db";
 
 const Page = async () => {
-   const data = await api.hello.hello.query();
-   return <h1>{data}</h1>;
+   const userCount = await prisma.user.count();
+   if (userCount === 0) redirect("/welcome");
+   return <></>;
 };
 
 export default Page;

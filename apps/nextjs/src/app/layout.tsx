@@ -1,9 +1,15 @@
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
+import { Toaster } from "@laundrey/ui/toaster";
 
 import "~/styles/style.css";
 
-export const metadata = {
-   title: "Laundrey",
+export const metadata: Metadata = {
+   title: {
+      default: "Laundrey",
+      template: "%s | Laundrey",
+   },
 };
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,7 +21,12 @@ export default function RootLayout({
 }) {
    return (
       <html lang="en">
-         <body className={inter.className}>{children}</body>
+         <body
+            className={`flex min-h-screen flex-col bg-gray-800 text-white ${inter.className}`}
+         >
+            {children}
+            <Toaster />
+         </body>
       </html>
    );
 }
