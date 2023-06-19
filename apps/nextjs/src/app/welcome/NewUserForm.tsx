@@ -17,11 +17,11 @@ import {
 import { Input } from "@laundrey/ui/input";
 
 const NewUserForm: React.FC = () => {
-   // const form = useZodForm({ schema: newUserValidator });
+   const form = useZodForm({ schema: newUserValidator });
 
    return (
       <>
-         {/* <Form {...form}>
+         <Form {...form}>
             <form
                onSubmit={form.handleSubmit(async (values) => {
                   console.log("hey", values);
@@ -36,7 +36,7 @@ const NewUserForm: React.FC = () => {
                         <FormLabel>Email</FormLabel>
                         <FormControl>
                            <Input
-                              placeholder="shadcn"
+                              placeholder="Email address"
                               type="email"
                               {...field}
                            />
@@ -50,8 +50,7 @@ const NewUserForm: React.FC = () => {
                />
                <Button type="submit">Submit</Button>
             </form>
-         </Form> */}
-         <Button type="submit">Submit</Button>
+         </Form>
       </>
    );
 };
