@@ -7,7 +7,7 @@ import React, {
    useMemo,
    useState,
 } from "react";
-import { getCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 
 import type { User } from "@laundrey/api/client";
 
@@ -45,6 +45,22 @@ export const useSession = (): UserContextValue => {
    return value as UserContextValue;
 };
 
+const fetchSession = async () => {
+   const r = await fetch("/api/trpc/user.session", {
+      credentials: "include",
+   });
+   const response = (await r.json()) as {
+      result: { data: { json: User } };
+   };
+   if (!response.result.data.json) throw new Error("failed request");
+   return response.result.data.json;
+};
+
+export const signOut = () => {
+   deleteCookie("access");
+   window.location.href = "/";
+};
+
 export type UserProviderProps = {
    children: React.ReactNode;
    user?: User;
@@ -67,16 +83,9 @@ export const UserProvider = (props: UserProviderProps) => {
       if (!cookie || loading) return;
       try {
          setLoading(true);
-         const r = await fetch("/api/trpc/user.session", {
-            credentials: "include",
-         });
-         const response = (await r.json()) as {
-            result: { data: { json: User } };
-         };
-         if (!response.result.data.json) throw new Error("failed request");
-         setUser(response.result.data.json);
-         if (process.env.NODE_ENV)
-            console.log("GET_SESSION", response.result.data.json.id);
+         const session = await fetchSession();
+         setUser(session);
+         if (process.env.NODE_ENV) console.log("GET_SESSION", session.id);
          setLoading(false);
       } catch (error) {
          if (process.env.NODE_ENV) console.error("GET_SESSION_FAIL", error);

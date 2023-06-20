@@ -4,20 +4,15 @@ import { getServerSession } from "~/lib/getServerSession";
 
 import { prisma } from "@laundrey/db";
 
-import TestClient from "./test-client";
-
 const Page = async () => {
    const userCount = await prisma.user.count();
-   if (userCount === 0) redirect("/welcome");
+   if (userCount === 0) return redirect("/welcome");
 
    const session = await getServerSession();
 
-   return (
-      <>
-         <h1>(SERVER) hi, {session?.name}</h1>
-         <TestClient />
-      </>
-   );
+   if (session) return redirect("/app");
+
+   if (!session) return redirect("/login");
 };
 
 export default Page;

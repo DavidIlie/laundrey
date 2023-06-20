@@ -8,6 +8,7 @@ const client = [
    "./src/form.tsx",
    "./src/input.tsx",
    "./src/label.tsx",
+   "./src/checkbox.tsx",
    "./src/popover.tsx",
    "./src/toaster.tsx",
    "./src/use-toast.tsx",

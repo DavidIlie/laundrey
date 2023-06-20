@@ -10,22 +10,26 @@ import { useSession } from "~/lib/user-provider";
 import { useZodForm } from "~/lib/zod-form";
 
 import { getMaxAge } from "@laundrey/api/client";
-import { newAdminUserValidator } from "@laundrey/api/validators";
+import { loginValidator } from "@laundrey/api/validators";
 import { Button } from "@laundrey/ui/button";
+import { Checkbox } from "@laundrey/ui/checkbox";
 import {
    Form,
    FormControl,
-   FormDescription,
    FormField,
    FormItem,
    FormLabel,
    FormMessage,
 } from "@laundrey/ui/form";
 import { Input } from "@laundrey/ui/input";
+import { Label } from "@laundrey/ui/label";
 import { useToast } from "@laundrey/ui/use-toast";
 
-const NewUserForm: React.FC = () => {
-   const form = useZodForm({ schema: newAdminUserValidator });
+const LogInForm: React.FC = () => {
+   const form = useZodForm({
+      schema: loginValidator,
+      defaultValues: { remember: false },
+   });
    const { toast } = useToast();
    const router = useRouter();
    const { update } = useSession();
@@ -34,14 +38,12 @@ const NewUserForm: React.FC = () => {
       <Form {...form}>
          <form
             onSubmit={form.handleSubmit(
-               async (values: z.infer<typeof newAdminUserValidator>) => {
+               async (values: z.infer<typeof loginValidator>) => {
                   try {
-                     const mutation = await api.user.createFirstUser.mutate(
-                        values,
-                     );
+                     const mutation = await api.user.login.mutate(values);
                      if (mutation instanceof TRPCError) return;
                      form.reset();
-                     const maxAge = getMaxAge(false);
+                     const maxAge = getMaxAge(values.remember);
                      setCookie("access", mutation.accessToken, { maxAge });
                      update(mutation.session);
                      router.push("/app");
@@ -50,30 +52,14 @@ const NewUserForm: React.FC = () => {
                         variant: "destructive",
                         title: "Uh oh! Something went wrong.",
                         description:
-                           (error as TRPCError).message ||
+                           (error as TRPCError).message ??
                            "There was a problem with your request.",
                      });
                   }
                },
             )}
-            className="space-y-2"
+            className="space-y-3"
          >
-            <FormField
-               control={form.control}
-               name="name"
-               render={({ field }) => (
-                  <FormItem>
-                     <FormLabel>Name</FormLabel>
-                     <FormControl>
-                        <Input type="text" {...field} />
-                     </FormControl>
-                     <FormDescription>
-                        This is the name associated to your account
-                     </FormDescription>
-                     <FormMessage />
-                  </FormItem>
-               )}
-            />
             <FormField
                control={form.control}
                name="email"
@@ -83,9 +69,6 @@ const NewUserForm: React.FC = () => {
                      <FormControl>
                         <Input type="email" {...field} />
                      </FormControl>
-                     <FormDescription>
-                        This is the email associated to your account.
-                     </FormDescription>
                      <FormMessage />
                   </FormItem>
                )}
@@ -99,20 +82,32 @@ const NewUserForm: React.FC = () => {
                      <FormControl>
                         <Input type="password" {...field} />
                      </FormControl>
-                     <FormDescription>
-                        This is the password associated to your account
-                     </FormDescription>
                      <FormMessage />
                   </FormItem>
                )}
             />
-            <Button type="submit">Create Account</Button>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-               You can always modify this later.
-            </p>
+            <FormField
+               control={form.control}
+               name="remember"
+               render={({ field }) => (
+                  <FormItem>
+                     <div className="flex items-center gap-1">
+                        <FormControl>
+                           <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                           />
+                        </FormControl>
+                        <Label>Remember Me</Label>
+                     </div>
+                     <FormMessage />
+                  </FormItem>
+               )}
+            />
+            <Button type="submit">Log In</Button>
          </form>
       </Form>
    );
 };
 
-export default NewUserForm;
+export default LogInForm;
