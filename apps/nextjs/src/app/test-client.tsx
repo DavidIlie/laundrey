@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "~/components/user-provider";
+import { useSession } from "~/lib/user-provider";
 
 const TestClient = () => {
    const session = useSession();

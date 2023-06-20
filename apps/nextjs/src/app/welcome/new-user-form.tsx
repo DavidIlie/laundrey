@@ -6,6 +6,7 @@ import { setCookie } from "cookies-next";
 import type { z } from "zod";
 
 import { api } from "~/trpc/client";
+import { useSession } from "~/lib/user-provider";
 import { useZodForm } from "~/lib/zod-form";
 
 import { getMaxAge } from "@laundrey/api/client";
@@ -22,8 +23,6 @@ import {
 } from "@laundrey/ui/form";
 import { Input } from "@laundrey/ui/input";
 import { useToast } from "@laundrey/ui/use-toast";
-
-import { useSession } from "~/components/user-provider";
 
 const NewUserForm: React.FC = () => {
    const form = useZodForm({ schema: newAdminUserValidator });

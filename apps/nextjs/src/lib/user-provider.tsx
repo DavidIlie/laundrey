@@ -9,8 +9,6 @@ import React, {
 } from "react";
 import { getCookie } from "cookies-next";
 
-import { api } from "~/trpc/client";
-
 import type { User } from "@laundrey/api/client";
 
 type UpdateSession = (data?: User) => User;
@@ -58,8 +56,6 @@ export const UserProvider = (props: UserProviderProps) => {
       throw new Error("React Context is unavailable in Server Components");
    }
 
-   const { children } = props;
-
    const hasInitialSession = props.user !== undefined;
 
    const [user, setUser] = useState(props.user);
@@ -70,9 +66,16 @@ export const UserProvider = (props: UserProviderProps) => {
       const cookie = getCookie("access");
       if (!cookie) return;
       try {
-         const session = await api.user.session.query();
-         setUser(session);
-         if (process.env.NODE_ENV) console.log("GET_SESSION", session.id);
+         const r = await fetch("/api/trpc/user.session", {
+            credentials: "include",
+         });
+         const response = (await r.json()) as {
+            result: { data: { json: User } };
+         };
+         if (!response.result.data.json) throw new Error("failed request");
+         setUser(response.result.data.json);
+         if (process.env.NODE_ENV)
+            console.log("GET_SESSION", response.result.data.json.id);
       } catch (error) {
          if (process.env.NODE_ENV) console.error("GET_SESSION_FAIL", error);
       }
@@ -128,7 +131,7 @@ export const UserProvider = (props: UserProviderProps) => {
 
    return (
       <UserContext.Provider value={value as UserContextValue}>
-         {children}
+         {props.children}
       </UserContext.Provider>
    );
 };

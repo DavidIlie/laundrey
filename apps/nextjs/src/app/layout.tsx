@@ -6,13 +6,14 @@ import { Toaster } from "@laundrey/ui/toaster";
 
 import "~/styles/style.css";
 
+import { UserProvider } from "~/lib/user-provider";
+
 import { getServerSessionUser } from "@laundrey/api";
 import type { User } from "@laundrey/api/client";
 import { cn } from "@laundrey/ui";
 
 import ThemeHotkey from "~/components/theme-hotkey";
 import { ThemeProvider } from "~/components/theme-provider";
-import { UserProvider } from "~/components/user-provider";
 
 export const metadata: Metadata = {
    title: {

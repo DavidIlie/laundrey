@@ -15,7 +15,7 @@ export type User = {
 } | null;
 
 export const getServerSessionUser = async (
-   cookie: string,
+   cookie?: string,
 ): Promise<User | null> => {
    try {
       if (!cookie) return null;
@@ -35,6 +35,8 @@ export const getServerSessionUser = async (
             image: true,
          },
       });
+
+      if (!user) throw new Error("impossible");
 
       return user;
    } catch (error) {
