@@ -2,10 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { TRPCError } from "@trpc/server";
+import { setCookie } from "cookies-next";
 import type { z } from "zod";
 
+import { api } from "~/trpc/client";
 import { useZodForm } from "~/lib/zod-form";
 
+import { getMaxAge } from "@laundrey/api/client";
 import { newAdminUserValidator } from "@laundrey/api/validators";
 import { Button } from "@laundrey/ui/button";
 import {
@@ -20,12 +23,13 @@ import {
 import { Input } from "@laundrey/ui/input";
 import { useToast } from "@laundrey/ui/use-toast";
 
-import { api } from "~/trpc/client";
+import { useSession } from "~/components/user-provider";
 
 const NewUserForm: React.FC = () => {
    const form = useZodForm({ schema: newAdminUserValidator });
    const { toast } = useToast();
    const router = useRouter();
+   const { update } = useSession();
 
    return (
       <Form {...form}>
@@ -42,6 +46,9 @@ const NewUserForm: React.FC = () => {
                         description: "There was a problem with your request.",
                      });
                   form.reset();
+                  const maxAge = getMaxAge(false);
+                  setCookie("access", mutation.accessToken, { maxAge });
+                  update(mutation.session);
                   router.push("/");
                },
             )}

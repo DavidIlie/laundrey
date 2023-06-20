@@ -1,9 +1,11 @@
 import { TRPCError } from "@trpc/server";
 
 import { newAdminUserValidator } from "../../validators";
-import { createUsername } from "../lib/createUsername";
+import { createUsername } from "../lib/create-username";
 import { hashPassword } from "../lib/password";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { getServerSessionUser } from "../lib/session-user";
+import { createTokens } from "../lib/token";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
    createFirstUser: publicProcedure
@@ -15,7 +17,7 @@ export const userRouter = createTRPCRouter({
                code: "BAD_REQUEST",
             });
 
-         await ctx.prisma.user.create({
+         const user = await ctx.prisma.user.create({
             data: {
                email: input.email,
                name: input.name,
@@ -24,6 +26,14 @@ export const userRouter = createTRPCRouter({
                isAdmin: true,
             },
          });
-         return true;
+
+         const { accessToken } = createTokens(user, false);
+
+         const session = await getServerSessionUser(accessToken);
+
+         return { accessToken, session };
       }),
+   session: protectedProcedure.query(async ({ ctx }) => {
+      return ctx.session;
+   }),
 });

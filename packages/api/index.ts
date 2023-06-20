@@ -11,3 +11,5 @@ export type { AppRouter } from "./src/root";
 export type RouterInputs = inferRouterInputs<AppRouter>;
 
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
+
+export { getServerSessionUser } from "./src/lib/session-user";

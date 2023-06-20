@@ -25,6 +25,7 @@
       "@trpc/next": "^10.30.0",
       "@trpc/react-query": "^10.30.0",
       "@trpc/server": "^10.30.0",
+      "cookies-next": "^2.1.2",
       "date-fns": "^2.30.0",
       "next": "^13.4.6",
       "next-themes": "^0.2.1",

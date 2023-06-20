@@ -1,14 +1,10 @@
 import { httpBatchLink, loggerLink } from "@trpc/client";
-import {
-   experimental_createActionHook,
-   experimental_createTRPCNextAppDirClient,
-   experimental_serverActionLink,
-} from "@trpc/next/app-dir/client";
+import { experimental_createTRPCNextAppDirClient } from "@trpc/next/app-dir/client";
 import superjson from "superjson";
 
 import type { AppRouter } from "@laundrey/api";
 
-import { getUrl, transformer } from "./shared";
+import { getUrl } from "./shared";
 
 export const api = experimental_createTRPCNextAppDirClient<AppRouter>({
    config() {
@@ -31,11 +27,6 @@ export const api = experimental_createTRPCNextAppDirClient<AppRouter>({
          ],
       };
    },
-});
-
-export const useAction = experimental_createActionHook({
-   links: [loggerLink(), experimental_serverActionLink()],
-   transformer,
 });
 
 export { type RouterInputs, type RouterOutputs } from "@laundrey/api";

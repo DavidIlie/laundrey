@@ -22,7 +22,7 @@ const config = {
       "^(next/(.*)$)|^(next$)",
       "<THIRD_PARTY_MODULES>",
       "",
-      "^~/server/(.*)$",
+      "^~/trpc/(.*)$",
       "~/env.mjs",
       "^~/lib/(.*)$",
       "^~/data/(.*)$",
