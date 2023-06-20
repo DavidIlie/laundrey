@@ -26,7 +26,6 @@ export default defineConfig((opts) => {
 
    return [
       {
-         // separate not to inject the banner
          ...common,
          entry: ["./src/index.ts", ...server],
       },

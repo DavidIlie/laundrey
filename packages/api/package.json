@@ -11,13 +11,14 @@
       "type-check": "tsc --noEmit"
    },
    "dependencies": {
+      "@laundrey/db": "^0.1.0",
+      "@t3-oss/env-nextjs": "^0.4.0",
       "@trpc/client": "^10.30.0",
       "@trpc/server": "^10.30.0",
+      "argon2": "^0.30.3",
       "superjson": "1.9.1",
-      "@t3-oss/env-nextjs": "^0.4.0",
       "zod": "^3.21.4",
-      "zod-form-data": "^2.0.1",
-      "@laundrey/db": "^0.1.0"
+      "zod-form-data": "^2.0.1"
    },
    "devDependencies": {
       "@laundrey/eslint-config": "0.1.0",

@@ -5,6 +5,11 @@ import { Toaster } from "@laundrey/ui/toaster";
 
 import "~/styles/style.css";
 
+import { cn } from "@laundrey/ui";
+
+import ThemeHotkey from "~/components/theme-hotkey";
+import { ThemeProvider } from "~/components/theme-provider";
+
 export const metadata: Metadata = {
    title: {
       default: "Laundrey",
@@ -12,7 +17,10 @@ export const metadata: Metadata = {
    },
 };
 
-const inter = Inter({ subsets: ["latin"] });
+const fontSans = Inter({
+   subsets: ["latin"],
+   variable: "--font-sans",
+});
 
 export default function RootLayout({
    children,
@@ -20,12 +28,18 @@ export default function RootLayout({
    children: React.ReactNode;
 }) {
    return (
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning className="bg-background">
          <body
-            className={`flex min-h-screen flex-col bg-gray-800 text-white ${inter.className}`}
+            className={cn(
+               "min-h-screen font-sans antialiased",
+               fontSans.variable,
+            )}
          >
-            {children}
-            <Toaster />
+            <ThemeProvider attribute="class">
+               <ThemeHotkey />
+               {children}
+               <Toaster />
+            </ThemeProvider>
          </body>
       </html>
    );

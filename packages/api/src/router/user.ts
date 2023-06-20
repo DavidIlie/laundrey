@@ -2,6 +2,7 @@ import { TRPCError } from "@trpc/server";
 
 import { newAdminUserValidator } from "../../validators";
 import { createUsername } from "../lib/createUsername";
+import { hashPassword } from "../lib/password";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
@@ -16,7 +17,9 @@ export const userRouter = createTRPCRouter({
 
          await ctx.prisma.user.create({
             data: {
-               ...input,
+               email: input.email,
+               name: input.name,
+               password: await hashPassword(input.password),
                username: await createUsername(input.name),
                isAdmin: true,
             },
