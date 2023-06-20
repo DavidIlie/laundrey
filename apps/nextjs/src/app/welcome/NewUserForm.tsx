@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import { TRPCError } from "@trpc/server";
-import { Form } from "react-hook-form";
 import type { z } from "zod";
 
 import { useZodForm } from "~/lib/zod-form";
@@ -10,6 +9,7 @@ import { useZodForm } from "~/lib/zod-form";
 import { newAdminUserValidator } from "@laundrey/api/validators";
 import { Button } from "@laundrey/ui/button";
 import {
+   Form,
    FormControl,
    FormDescription,
    FormField,
