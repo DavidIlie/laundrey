@@ -14,9 +14,7 @@ export type User = {
    isAdmin: boolean;
 } | null;
 
-export const getServerSessionUser = async (
-   cookie?: string,
-): Promise<User | null> => {
+export const getServerSessionUser = async (cookie?: string) => {
    try {
       if (!cookie) return null;
 

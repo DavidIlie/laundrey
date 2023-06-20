@@ -64,8 +64,9 @@ export const UserProvider = (props: UserProviderProps) => {
 
    const getSession = async () => {
       const cookie = getCookie("access");
-      if (!cookie) return;
+      if (!cookie || loading) return;
       try {
+         setLoading(true);
          const r = await fetch("/api/trpc/user.session", {
             credentials: "include",
          });
@@ -76,6 +77,7 @@ export const UserProvider = (props: UserProviderProps) => {
          setUser(response.result.data.json);
          if (process.env.NODE_ENV)
             console.log("GET_SESSION", response.result.data.json.id);
+         setLoading(false);
       } catch (error) {
          if (process.env.NODE_ENV) console.error("GET_SESSION_FAIL", error);
       }
@@ -92,6 +94,7 @@ export const UserProvider = (props: UserProviderProps) => {
          }
       };
       void work();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    const { refetchOnWindowFocus = true } = props;
@@ -111,6 +114,7 @@ export const UserProvider = (props: UserProviderProps) => {
             visibilityHandler,
             false,
          );
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [refetchOnWindowFocus]);
 
    // eslint-disable-next-line @typescript-eslint/no-explicit-any
