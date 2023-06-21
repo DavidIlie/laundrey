@@ -91,6 +91,10 @@
       "import": "./dist/use-toast.mjs",
       "types": "./dist/use-toast.d.ts"
     },
+    "./icons": {
+      "import": "./dist/icons.mjs",
+      "types": "./dist/icons.d.ts"
+    },
     "./button": {
       "import": "./dist/button.mjs",
       "types": "./dist/button.d.ts"
@@ -134,6 +138,9 @@
       ],
       "checkbox": [
         "dist/checkbox.d.ts"
+      ],
+      "icons": [
+        "dist/icons.d.ts"
       ]
     }
   }

@@ -29,6 +29,7 @@ const config = {
          { checksVoidReturn: { attributes: false } },
       ],
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+      "@typescript-eslint/no-unsafe-call": "off",
    },
    ignorePatterns: [
       "**/.eslintrc.cjs",

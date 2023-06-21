@@ -12,6 +12,7 @@ const client = [
    "./src/popover.tsx",
    "./src/toaster.tsx",
    "./src/use-toast.tsx",
+   "./src/icons.tsx",
 ];
 
 const server = ["./src/button.tsx", "./src/toast.tsx"];
