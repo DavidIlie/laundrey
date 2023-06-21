@@ -129,7 +129,7 @@ const NavigationElement: React.FC<{
          href={`/app${href}`}
          className={cn(
             "flex items-center gap-3 rounded-lg px-2 py-3 duration-150",
-            pathname === `/app${href === "/" && ""}`
+            pathname === `/app${href === "/" ? "" : href}`
                ? "pointer-events-none bg-gray-100 dark:bg-container/80"
                : "hover:bg-gray-100 dark:hover:bg-container/90",
          )}

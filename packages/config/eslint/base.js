@@ -30,6 +30,7 @@ const config = {
       ],
       "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
       "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
    },
    ignorePatterns: [
       "**/.eslintrc.cjs",

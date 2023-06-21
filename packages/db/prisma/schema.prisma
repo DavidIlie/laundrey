@@ -9,14 +9,61 @@ datasource db {
 }
 
 model User {
-    id             String    @id @default(uuid())
+    id               String         @id @default(uuid())
+    name             String
+    username         String
+    email            String
+    image            String?
+    registered       DateTime       @default(now())
+    isAdmin          Boolean        @default(false)
+    password         String
+    tokenLifecycle   Int            @default(1)
+    lastLogin        DateTime?
+    Clothing         Clothing[]
+    ClothingCategory Category[]
+    LaundryEvent     LaundryEvent[]
+}
+
+model LaundryEvent {
+    id          String        @id @default(uuid())
+    clothes     Clothing[]
+    created     DateTime      @default(now())
+    userId      String
+    user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+    LaundryItem LaundryItem[]
+}
+
+model LaundryItem {
+    id           String       @id @default(uuid())
+    clothingId   String
+    clothing     Clothing     @relation(fields: [clothingId], references: [id], onDelete: Cascade)
+    created      DateTime     @default(now())
+    finished     DateTime?
+    eventId      String
+    laundryEvent LaundryEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+    id          String     @id @default(uuid())
+    userId      String
+    user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    clothes     Clothing[]
+    name        String
+    description String?
+    tags        String?
+    created     DateTime   @default(now())
+}
+
+model Clothing {
+    id             String        @id @default(nanoid())
+    userId         String
+    user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     name           String
-    username       String
-    email          String
-    image          String?
-    registered     DateTime  @default(now())
-    isAdmin        Boolean   @default(false)
-    password       String
-    tokenLifecycle Int       @default(1)
-    lastLogin      DateTime?
+    brand          String?
+    photos         String[]
+    laundryEventId String?
+    created        DateTime      @default(now())
+    LaundryEvent   LaundryEvent? @relation(fields: [laundryEventId], references: [id])
+    categories     Category[]
+    LaundryItem    LaundryItem[]
 }

@@ -151,6 +151,9 @@
       ],
       "sheet": [
         "dist/sheet.d.ts"
+      ],
+      "aspect-ratio": [
+        "dist/aspect-ratio.d.ts"
       ]
     }
   }

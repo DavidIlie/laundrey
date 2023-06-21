@@ -9,6 +9,14 @@ const config = {
    },
    eslint: { ignoreDuringBuilds: true },
    typescript: { ignoreBuildErrors: true },
+   images: {
+      remotePatterns: [
+         {
+            protocol: "https",
+            hostname: "cdn.davidapps.dev",
+         },
+      ],
+   },
 };
 
 export default config;
