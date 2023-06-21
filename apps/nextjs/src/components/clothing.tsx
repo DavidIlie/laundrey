@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { RouterOutputs } from "~/trpc/shared";
 
 import { shimmer } from "@laundrey/ui";
+import { Badge } from "@laundrey/ui/badge";
 
 const Clothing: React.FC<{ clothing: RouterOutputs["clothes"]["all"][0] }> = ({
    clothing,
@@ -32,19 +33,16 @@ const Clothing: React.FC<{ clothing: RouterOutputs["clothes"]["all"][0] }> = ({
          <div className="mb-4">
             <h3 className="text-xl font-semibold">{clothing.name}</h3>
             {clothing.brand && (
-               <p className="-mt-1 text-sm text-gray-600">{clothing.brand}</p>
+               <p className="-mt-1 text-sm text-gray-600 dark:text-gray-500">
+                  {clothing.brand}
+               </p>
             )}
          </div>
-         <ul className="-mb-1 flex flex-wrap">
+         <div className="-mb-1 flex flex-wrap">
             {clothing.categories.map((category) => (
-               <li
-                  key={category.id}
-                  className="mb-2 mr-2 rounded-md bg-gray-200 px-2 py-1 text-xs text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-               >
-                  {category.name}
-               </li>
+               <Badge key={category.id}>{category.name}</Badge>
             ))}
-         </ul>
+         </div>
       </Link>
    );
 };

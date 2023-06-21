@@ -16,7 +16,7 @@ const client = [
    "./src/sheet.tsx",
 ];
 
-const server = ["./src/button.tsx", "./src/toast.tsx"];
+const server = ["./src/button.tsx", "./src/toast.tsx", "./src/badge.tsx"];
 
 export default defineConfig((opts) => {
    const common = {

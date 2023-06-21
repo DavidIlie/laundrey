@@ -109,6 +109,10 @@
     "./toast": {
       "import": "./dist/toast.mjs",
       "types": "./dist/toast.d.ts"
+    },
+    "./badge": {
+      "import": "./dist/badge.mjs",
+      "types": "./dist/badge.d.ts"
     }
   },
   "typesVersions": {
@@ -154,6 +158,15 @@
       ],
       "aspect-ratio": [
         "dist/aspect-ratio.d.ts"
+      ],
+      "badge": [
+        "dist/badge.d.ts"
+      ],
+      "command": [
+        "dist/command.d.ts"
+      ],
+      "dialog": [
+        "dist/dialog.d.ts"
       ]
     }
   }

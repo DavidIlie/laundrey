@@ -13,3 +13,10 @@ export const loginValidator = z.object({
    password: passwordDefault,
    remember: z.boolean(),
 });
+
+export const categoryValidator = z.object({
+   name: z.string(),
+   description: z.string().optional(),
+   tags: z.array(z.string()),
+   category: z.array(z.string()),
+});
