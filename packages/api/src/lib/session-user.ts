@@ -31,10 +31,13 @@ export const getServerSessionUser = async (cookie?: string) => {
             name: true,
             username: true,
             image: true,
+            tokenLifecycle: true,
          },
       });
 
       if (!user) throw new Error("impossible");
+
+      if (data.tokenLifecycle !== user.tokenLifecycle) return null;
 
       return user;
    } catch (error) {

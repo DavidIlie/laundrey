@@ -6,15 +6,20 @@ import { env } from "../env.mjs";
 
 export type AccessTokenData = {
    userId: string;
+   tokenLifecycle: number;
 };
 
 export const createTokens = (
    user: User,
    remember: boolean,
 ): { accessToken: string } => {
-   const accessToken = sign({ userId: user.id }, env.JWT_SECRET, {
-      expiresIn: remember ? "7d" : "1d",
-   });
+   const accessToken = sign(
+      { userId: user.id, tokenLifecycle: user.tokenLifecycle },
+      env.JWT_SECRET,
+      {
+         expiresIn: remember ? "7d" : "1d",
+      },
+   );
 
    return { accessToken };
 };
