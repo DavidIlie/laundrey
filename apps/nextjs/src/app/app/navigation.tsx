@@ -46,48 +46,46 @@ const Navigation: React.FC = () => {
                </SheetHeader>
             </SheetContent>
          </Sheet>
-         <div className="z-20 flex duration-150 cursor-pointer lg:absolute lg:bottom-0 lg:left-0 lg:w-full lg:items-center lg:space-x-4 lg:p-4 lg:hover:bg-gray-50 lg:dark:hover:bg-container/90">
-            <DropdownMenu>
-               <DropdownMenuTrigger className="items-center w-full gap-2 lg:flex">
-                  <Avatar>
-                     <AvatarImage src={session.user?.image as string} />
-                     <AvatarFallback>
-                        {getInitials(session.user?.name)}
-                     </AvatarFallback>
-                  </Avatar>
-                  <h1 className="hidden lg:block">{session.user?.name}</h1>
-               </DropdownMenuTrigger>
-               <DropdownMenuContent className="w-60">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                     <Link href="/app/profile">Profile</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => signOut()}>
-                     Log Out
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuLabel>Misc</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                     <a
-                        href="https://github.com/davidilie/laundrey/issues"
-                        target="_blank"
-                        rel="noreferrer"
-                     >
-                        Report a bug
-                     </a>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                     onClick={() =>
-                        setTheme(resolvedTheme === "dark" ? "light" : "dark")
-                     }
+         <DropdownMenu>
+            <DropdownMenuTrigger className="z-20 flex duration-150 cursor-pointer lg:absolute lg:bottom-0 lg:left-0 lg:w-full lg:items-center lg:space-x-4 lg:p-4 lg:hover:bg-gray-50 lg:dark:hover:bg-container/90">
+               <Avatar>
+                  <AvatarImage src={session.user?.image as string} />
+                  <AvatarFallback>
+                     {getInitials(session.user?.name)}
+                  </AvatarFallback>
+               </Avatar>
+               <h1 className="hidden lg:block">{session.user?.name}</h1>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-60">
+               <DropdownMenuLabel>My Account</DropdownMenuLabel>
+               <DropdownMenuSeparator />
+               <DropdownMenuItem asChild>
+                  <Link href="/app/profile">Profile</Link>
+               </DropdownMenuItem>
+               <DropdownMenuItem onClick={() => signOut()}>
+                  Log Out
+               </DropdownMenuItem>
+               <DropdownMenuSeparator />
+               <DropdownMenuLabel>Misc</DropdownMenuLabel>
+               <DropdownMenuSeparator />
+               <DropdownMenuItem asChild>
+                  <a
+                     href="https://github.com/davidilie/laundrey/issues"
+                     target="_blank"
+                     rel="noreferrer"
                   >
-                     {resolvedTheme === "dark" ? "Light" : "Dark"} Mode
-                  </DropdownMenuItem>
-               </DropdownMenuContent>
-            </DropdownMenu>
-         </div>
+                     Report a bug
+                  </a>
+               </DropdownMenuItem>
+               <DropdownMenuItem
+                  onClick={() =>
+                     setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                  }
+               >
+                  {resolvedTheme === "dark" ? "Light" : "Dark"} Mode
+               </DropdownMenuItem>
+            </DropdownMenuContent>
+         </DropdownMenu>
       </aside>
    );
 };
