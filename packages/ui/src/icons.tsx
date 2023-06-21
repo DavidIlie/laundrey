@@ -29,3 +29,4 @@ export const Sun = Lucide.SunMedium;
 export const Moon = Lucide.Moon;
 export const Key = Lucide.Key;
 export const Shirt = Lucide.Shirt;
+export const ShoppingBag = Lucide.ShoppingBag;
