@@ -1,6 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { PostPolicyResult } from "minio";
 import { v4 } from "uuid";
+import { z } from "zod";
 
 import { clothingValidator, serverPhotoValidator } from "../../validators";
 import { env } from "../env.mjs";
@@ -79,5 +80,15 @@ export const clothesRouter = createTRPCRouter({
          if (presignedUrls.length !== 0) return presignedUrls;
 
          return true;
+      }),
+   get: protectedProcedure
+      .input(z.object({ id: z.string().uuid() }))
+      .query(async ({ ctx, input }) => {
+         return await ctx.prisma.clothing.findFirst({
+            where: { id: input.id, userId: ctx.session.id },
+            include: {
+               categories: true,
+            },
+         });
       }),
 });
