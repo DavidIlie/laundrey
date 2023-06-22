@@ -34,7 +34,7 @@ const Page = async () => {
                            className="h-32"
                            style={getRandomPatternStyle(event.id)}
                         />
-                        <CardHeader className="border-t-2">
+                        <CardHeader className="border-t-2 dark:bg-gray-800">
                            <CardTitle className="-mt-2">
                               {createLaundryEventName(event.created)}
                            </CardTitle>
