@@ -3,9 +3,9 @@ import { TRPCError } from "@trpc/server";
 import { brandAndCategoryValidator, findByIdValidator } from "../../validators";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
-export const categoriesRouter = createTRPCRouter({
+export const brandsRouter = createTRPCRouter({
    all: protectedProcedure.query(async ({ ctx }) => {
-      return await ctx.prisma.category.findMany({
+      return await ctx.prisma.brand.findMany({
          where: { userId: ctx.session.id },
          include: {
             _count: {
@@ -24,16 +24,16 @@ export const categoriesRouter = createTRPCRouter({
    create: protectedProcedure
       .input(brandAndCategoryValidator)
       .mutation(async ({ ctx, input }) => {
-         const possible = await ctx.prisma.category.findFirst({
+         const possible = await ctx.prisma.brand.findFirst({
             where: { name: input.name, userId: ctx.session.id },
          });
          if (possible)
             return new TRPCError({
-               message: "You already have a category with the same name!",
+               message: "You already have a brand with the same name!",
                code: "CONFLICT",
             });
 
-         await ctx.prisma.category.create({
+         await ctx.prisma.brand.create({
             data: { userId: ctx.session.id, ...input },
          });
 
@@ -42,7 +42,7 @@ export const categoriesRouter = createTRPCRouter({
    get: protectedProcedure
       .input(findByIdValidator)
       .query(async ({ ctx, input }) => {
-         const find = await ctx.prisma.category.findFirst({
+         const find = await ctx.prisma.brand.findFirst({
             where: { id: input.id, userId: ctx.session.id },
             include: {
                _count: {
@@ -59,7 +59,7 @@ export const categoriesRouter = createTRPCRouter({
          });
          if (!find)
             throw new TRPCError({
-               message: "Cannot find category",
+               message: "Cannot find brand",
                code: "NOT_FOUND",
             });
 
@@ -68,16 +68,16 @@ export const categoriesRouter = createTRPCRouter({
    update: protectedProcedure
       .input(brandAndCategoryValidator.and(findByIdValidator))
       .mutation(async ({ ctx, input }) => {
-         const find = await ctx.prisma.category.findFirst({
+         const find = await ctx.prisma.brand.findFirst({
             where: { id: input.id, userId: ctx.session.id },
          });
          if (!find)
             throw new TRPCError({
-               message: "Cannot find category",
+               message: "Cannot find brand",
                code: "NOT_FOUND",
             });
 
-         await ctx.prisma.category.update({
+         await ctx.prisma.brand.update({
             where: { id: input.id },
             data: input,
          });
@@ -87,16 +87,16 @@ export const categoriesRouter = createTRPCRouter({
    delete: protectedProcedure
       .input(findByIdValidator)
       .mutation(async ({ ctx, input }) => {
-         const find = await ctx.prisma.category.findFirst({
+         const find = await ctx.prisma.brand.findFirst({
             where: { id: input.id, userId: ctx.session.id },
          });
          if (!find)
             throw new TRPCError({
-               message: "Cannot find category",
+               message: "Cannot find brand",
                code: "NOT_FOUND",
             });
 
-         await ctx.prisma.category.delete({ where: { id: find.id } });
+         await ctx.prisma.brand.delete({ where: { id: find.id } });
 
          return true;
       }),

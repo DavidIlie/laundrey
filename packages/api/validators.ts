@@ -14,6 +14,20 @@ export const loginValidator = z.object({
    remember: z.boolean(),
 });
 
+export const brandAndCategoryValidator = z.object({
+   name: z.string(),
+   description: z.string().optional(),
+});
+
+export const findByIdValidator = z.object({ id: z.string().uuid() });
+
+export const clothingValidator = z.object({
+   name: z.string(),
+   brand: z.string().uuid(),
+   category: z.array(z.string().uuid()).optional(),
+   quantity: z.number(),
+});
+
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [
    "image/jpeg",
@@ -22,15 +36,6 @@ const ACCEPTED_IMAGE_TYPES = [
    "image/webp",
    "image/heif",
 ];
-
-export const byIdClothingValidator = z.object({ id: z.string().uuid() });
-
-export const clothingValidator = z.object({
-   name: z.string(),
-   brand: z.string().optional(),
-   category: z.array(z.string().uuid()).optional(),
-   quantity: z.number(),
-});
 
 export const clientPhotoValidator = z.object({
    photos: z

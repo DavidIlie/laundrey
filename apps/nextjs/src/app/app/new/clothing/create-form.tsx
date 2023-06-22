@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import type { TRPCError } from "@trpc/server";
 import type { z } from "zod";
 
+import type { RouterOutputs } from "~/trpc/client";
 import { api } from "~/trpc/client";
 import { useZodForm } from "~/lib/zod-form";
 
@@ -13,8 +14,15 @@ import {
    clientPhotoValidator,
    clothingValidator,
 } from "@laundrey/api/validators";
-import type { Category } from "@laundrey/db";
+import { cn } from "@laundrey/ui";
 import { Button } from "@laundrey/ui/button";
+import {
+   Command,
+   CommandEmpty,
+   CommandGroup,
+   CommandInput,
+   CommandItem,
+} from "@laundrey/ui/command";
 import {
    Form,
    FormControl,
@@ -23,17 +31,19 @@ import {
    FormLabel,
    FormMessage,
 } from "@laundrey/ui/form";
-import { Spinner } from "@laundrey/ui/icons";
+import { Check, Spinner } from "@laundrey/ui/icons";
 import { Input } from "@laundrey/ui/input";
 import { Label } from "@laundrey/ui/label";
 import { MultiSelect } from "@laundrey/ui/multiselect";
+import { Popover, PopoverContent, PopoverTrigger } from "@laundrey/ui/popover";
 import { useToast } from "@laundrey/ui/use-toast";
 
 const joinedValidator = clothingValidator.and(clientPhotoValidator);
 
-const CreateForm: React.FC<{ categories: Category[] }> = ({
-   categories: serverFedCategories,
-}) => {
+const CreateForm: React.FC<{
+   categories: RouterOutputs["categories"]["all"];
+   brands: RouterOutputs["brands"]["all"];
+}> = ({ categories: serverFedCategories, brands: serverFedBrands }) => {
    const { toast } = useToast();
    const router = useRouter();
    const [loading, setLoading] = useState(false);
@@ -48,6 +58,11 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
    const watchPhotos = form.watch("photos");
 
    const categories = serverFedCategories.map((cat) => ({
+      label: cat.name,
+      value: cat.id,
+   }));
+
+   const brands = serverFedBrands.map((cat) => ({
       label: cat.name,
       value: cat.id,
    }));
@@ -143,11 +158,55 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
                   control={form.control}
                   name="brand"
                   render={({ field }) => (
-                     <FormItem>
+                     <FormItem className="flex flex-col">
                         <FormLabel>Brand</FormLabel>
-                        <FormControl>
-                           <Input {...field} />
-                        </FormControl>
+                        <Popover>
+                           <PopoverTrigger asChild>
+                              <FormControl>
+                                 <Button
+                                    variant="outline"
+                                    role="combobox"
+                                    className={cn(
+                                       "justify-between bg-white dark:bg-gray-800",
+                                       !field.value && "text-muted-foreground",
+                                    )}
+                                 >
+                                    {field.value &&
+                                       brands.find(
+                                          (brand) =>
+                                             brand.value === field.value,
+                                       )?.label}
+                                 </Button>
+                              </FormControl>
+                           </PopoverTrigger>
+                           <PopoverContent className="w-[300px] p-0">
+                              <Command>
+                                 <CommandInput placeholder="Search brands..." />
+                                 <CommandEmpty>No brand found.</CommandEmpty>
+                                 <CommandGroup>
+                                    {brands.map((brand) => (
+                                       <CommandItem
+                                          value={brand.value}
+                                          key={brand.value}
+                                          onSelect={(value) => {
+                                             form.setValue("brand", value);
+                                          }}
+                                       >
+                                          <Check
+                                             className={cn(
+                                                "mr-2 h-4 w-4",
+                                                brand.value === field.value
+                                                   ? "opacity-100"
+                                                   : "opacity-0",
+                                             )}
+                                          />
+                                          {brand.label}
+                                       </CommandItem>
+                                    ))}
+                                 </CommandGroup>
+                              </Command>
+                           </PopoverContent>
+                        </Popover>
                         <FormMessage />
                      </FormItem>
                   )}

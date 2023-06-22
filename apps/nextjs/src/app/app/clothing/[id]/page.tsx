@@ -45,7 +45,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                   <DeleteButton id={clothing.id} />
                </div>
                <div className="mb-2 mt-2 border-t-2 dark:border-gray-400 lg:mr-4" />
-               <h1>Brand: {clothing.brand}</h1>
+               {clothing.brand && <h1>Brand: {clothing.brand.name}</h1>}
                <h1>Quantity: {clothing.quantity.toString()}</h1>
                <h1>Date Added: {clothing.created.toDateString()}</h1>
                <div className="mb-4 mt-3 border-t-2 dark:border-gray-400 lg:mr-4" />

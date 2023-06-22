@@ -15,7 +15,7 @@ const Clothing: React.FC<{ clothing: RouterOutputs["clothes"]["all"][0] }> = ({
          href={`/app/clothing/${clothing.id}`}
       >
          <div className="mb-2">
-            <div className="relative mx-auto h-96 w-full md:h-48 md:w-64">
+            <div className="lg:flex-shrink-0">
                <Image
                   src={
                      clothing.photos.length === 0
@@ -23,10 +23,11 @@ const Clothing: React.FC<{ clothing: RouterOutputs["clothes"]["all"][0] }> = ({
                         : clothing.photos[0]!
                   }
                   alt={clothing.name}
-                  fill
-                  className="rounded-md object-cover"
+                  height="500"
+                  width="500"
+                  className="h-96 rounded-md object-cover lg:h-48"
                   placeholder="blur"
-                  blurDataURL={shimmer(1000, 1000)}
+                  blurDataURL={shimmer(500, 500)}
                />
             </div>
          </div>
@@ -34,7 +35,7 @@ const Clothing: React.FC<{ clothing: RouterOutputs["clothes"]["all"][0] }> = ({
             <h3 className="text-xl font-semibold">{clothing.name}</h3>
             {clothing.brand && (
                <p className="-mt-1 text-sm text-gray-600 dark:text-gray-500">
-                  {clothing.brand}
+                  {clothing.brand.name}
                </p>
             )}
          </div>

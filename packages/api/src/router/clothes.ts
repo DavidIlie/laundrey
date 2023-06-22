@@ -1,11 +1,10 @@
 import { TRPCError } from "@trpc/server";
 import { PostPolicyResult } from "minio";
 import { v4 } from "uuid";
-import { z } from "zod";
 
 import {
-   byIdClothingValidator,
    clothingValidator,
+   findByIdValidator,
    serverPhotoValidator,
 } from "../../validators";
 import { env } from "../env.mjs";
@@ -20,7 +19,7 @@ export const clothesRouter = createTRPCRouter({
    all: protectedProcedure.query(async ({ ctx }) => {
       return await ctx.prisma.clothing.findMany({
          where: { userId: ctx.session.id },
-         include: { categories: true },
+         include: { categories: true, brand: true },
       });
    }),
    create: protectedProcedure
@@ -53,7 +52,7 @@ export const clothesRouter = createTRPCRouter({
                id,
                userId: ctx.session.id,
                name: input.name,
-               brand: input.brand,
+               brandId: input.brand,
                quantity: input.quantity,
                categories: {
                   connect: foundCategories,
@@ -87,17 +86,18 @@ export const clothesRouter = createTRPCRouter({
          return true;
       }),
    get: protectedProcedure
-      .input(byIdClothingValidator)
+      .input(findByIdValidator)
       .query(async ({ ctx, input }) => {
          return await ctx.prisma.clothing.findFirst({
             where: { id: input.id, userId: ctx.session.id },
             include: {
                categories: true,
+               brand: true,
             },
          });
       }),
    delete: protectedProcedure
-      .input(byIdClothingValidator)
+      .input(findByIdValidator)
       .mutation(async ({ ctx, input }) => {
          const clothing = await ctx.prisma.clothing.findFirst({
             where: { id: input.id, userId: ctx.session.id },

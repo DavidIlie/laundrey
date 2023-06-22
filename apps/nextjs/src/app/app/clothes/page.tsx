@@ -1,32 +1,44 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
-import { api } from "~/trpc/server";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@laundrey/ui/tabs";
 
-import { Button } from "@laundrey/ui/button";
-
-import Clothing from "~/components/clothing";
 import AppLayout from "~/app/layout/app-layout";
+import BrandsModule from "./module-brands";
+import CategoriesModule from "./module-categories";
+import ClothesModule from "./module-clothes";
 
 export const metadata: Metadata = {
    title: "Clothes",
 };
 
-const Page = async () => {
-   const clothes = await api.clothes.all.query();
+const Page = () => {
    return (
       <AppLayout
          title="Clothing"
          description="Manage all your items of clothing."
       >
-         <Link href="/app/new/clothing">
-            <Button className="mb-3">Add new</Button>
-         </Link>
-         <div className="grid grid-cols-1 space-y-4 sm:grid-cols-2 sm:space-y-0 lg:grid-cols-4">
-            {clothes.map((clothing, index) => (
-               <Clothing clothing={clothing} key={index} />
-            ))}
-         </div>
+         <Tabs defaultValue="clothes">
+            <TabsList className="w-full">
+               <TabsTrigger value="clothes" className="w-1/3">
+                  Clothes
+               </TabsTrigger>
+               <TabsTrigger value="brands" className="w-1/3">
+                  Brands
+               </TabsTrigger>
+               <TabsTrigger value="categories" className="w-1/3">
+                  Categories
+               </TabsTrigger>
+            </TabsList>
+            <TabsContent value="clothes">
+               <ClothesModule />
+            </TabsContent>
+            <TabsContent value="brands">
+               <BrandsModule />
+            </TabsContent>
+            <TabsContent value="categories">
+               <CategoriesModule />
+            </TabsContent>
+         </Tabs>
       </AppLayout>
    );
 };

@@ -22,6 +22,7 @@ model User {
     Clothing         Clothing[]
     ClothingCategory Category[]
     LaundryEvent     LaundryEvent[]
+    Brand            Brand[]
 }
 
 model LaundryEvent {
@@ -54,17 +55,28 @@ model Category {
     created     DateTime   @default(now())
 }
 
+model Brand {
+    id          String     @id @default(uuid())
+    userId      String
+    user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    clothes     Clothing[]
+    name        String
+    description String?
+    created     DateTime   @default(now())
+}
+
 model Clothing {
     id             String        @id @default(uuid())
     userId         String
     user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     name           String
-    brand          String?
     photos         String[]
     laundryEventId String?
     created        DateTime      @default(now())
-    LaundryEvent   LaundryEvent? @relation(fields: [laundryEventId], references: [id])
+    LaundryEvent   LaundryEvent? @relation(fields: [laundryEventId], references: [id], onDelete: Cascade)
     categories     Category[]
     LaundryItem    LaundryItem[]
     quantity       BigInt        @default(1)
+    brand          Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+    brandId        String?
 }

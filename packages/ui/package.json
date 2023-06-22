@@ -17,6 +17,7 @@
     "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.6",
+    "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.4",
     "add": "^2.0.6",
     "class-variance-authority": "^0.6.0",
@@ -114,6 +115,14 @@
       "import": "./dist/dialog.mjs",
       "types": "./dist/dialog.d.ts"
     },
+    "./tabs": {
+      "import": "./dist/tabs.mjs",
+      "types": "./dist/tabs.d.ts"
+    },
+    "./table": {
+      "import": "./dist/table.mjs",
+      "types": "./dist/table.d.ts"
+    },
     "./button": {
       "import": "./dist/button.mjs",
       "types": "./dist/button.d.ts"
@@ -182,6 +191,12 @@
       ],
       "multiselect": [
         "dist/multiselect.d.ts"
+      ],
+      "tabs": [
+        "dist/tabs.d.ts"
+      ],
+      "table": [
+        "dist/table.d.ts"
       ]
     }
   }
