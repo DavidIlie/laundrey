@@ -106,6 +106,14 @@
       "import": "./dist/multiselect.mjs",
       "types": "./dist/multiselect.d.ts"
     },
+    "./command": {
+      "import": "./dist/command.mjs",
+      "types": "./dist/command.d.ts"
+    },
+    "./dialog": {
+      "import": "./dist/dialog.mjs",
+      "types": "./dist/dialog.d.ts"
+    },
     "./button": {
       "import": "./dist/button.mjs",
       "types": "./dist/button.d.ts"

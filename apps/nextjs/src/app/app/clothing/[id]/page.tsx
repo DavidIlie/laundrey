@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import { api } from "~/trpc/server";
 import { getServerSession } from "~/lib/getServerSession";
 
 import { prisma } from "@laundrey/db";
-import { shimmer } from "@laundrey/ui";
 import { Badge } from "@laundrey/ui/badge";
 
 import AppLayout from "~/app/layout/app-layout";
+import ImageViewer from "./image-viewer";
 
 export async function generateMetadata(params: {
    id: string;
@@ -49,17 +48,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
             </div>
             <div className="1/3 space-y-3">
                {clothing.photos.map((photo, index) => (
-                  <div key={index} className="w-[100%] md:flex-shrink-0">
-                     <Image
-                        src={photo}
-                        placeholder="blur"
-                        blurDataURL={shimmer(500, 500)}
-                        alt={`Photo #${index + 1}`}
-                        width={500}
-                        height={300}
-                        className="h-64 object-cover"
-                     />
-                  </div>
+                  <ImageViewer photo={photo} index={index} key={index} />
                ))}
             </div>
          </div>
