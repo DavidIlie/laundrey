@@ -102,6 +102,10 @@
       "import": "./dist/sheet.mjs",
       "types": "./dist/sheet.d.ts"
     },
+    "./multiselect": {
+      "import": "./dist/multiselect.mjs",
+      "types": "./dist/multiselect.d.ts"
+    },
     "./button": {
       "import": "./dist/button.mjs",
       "types": "./dist/button.d.ts"
@@ -167,6 +171,9 @@
       ],
       "dialog": [
         "dist/dialog.d.ts"
+      ],
+      "multiselect": [
+        "dist/multiselect.d.ts"
       ]
     }
   }

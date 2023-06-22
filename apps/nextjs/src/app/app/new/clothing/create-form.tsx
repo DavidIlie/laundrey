@@ -6,7 +6,6 @@ import { useZodForm } from "~/lib/zod-form";
 
 import { categoryValidator } from "@laundrey/api/validators";
 import type { Category } from "@laundrey/db";
-import { cn } from "@laundrey/ui";
 import { Button } from "@laundrey/ui/button";
 import {
    Form,
@@ -16,10 +15,8 @@ import {
    FormLabel,
    FormMessage,
 } from "@laundrey/ui/form";
-import { Check, Down } from "@laundrey/ui/icons";
 import { Input } from "@laundrey/ui/input";
-
-//TODO: https://github.com/mxkaske/mxkaske.dev/blob/main/components/craft/fancy-multi-select.tsx
+import { MultiSelect } from "@laundrey/ui/multiselect";
 
 const CreateForm: React.FC<{ categories: Category[] }> = ({
    categories: serverFedCategories,
@@ -73,9 +70,16 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
                control={form.control}
                name="category"
                render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem>
                      <FormLabel>Category</FormLabel>
-                     <FormControl></FormControl>
+                     <FormControl>
+                        <MultiSelect
+                           data={categories}
+                           placeholder="Select categories..."
+                           {...field}
+                        />
+                     </FormControl>
+                     <FormMessage />
                   </FormItem>
                )}
             />

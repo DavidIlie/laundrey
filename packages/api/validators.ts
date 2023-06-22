@@ -17,6 +17,6 @@ export const loginValidator = z.object({
 export const categoryValidator = z.object({
    name: z.string(),
    description: z.string().optional(),
-   tags: z.array(z.string()),
-   category: z.array(z.string()),
+   tags: z.array(z.string()).optional(),
+   category: z.array(z.string()).optional(),
 });

@@ -14,6 +14,7 @@ const client = [
    "./src/use-toast.tsx",
    "./src/icons.tsx",
    "./src/sheet.tsx",
+   "./src/multiselect.tsx",
 ];
 
 const server = ["./src/button.tsx", "./src/toast.tsx", "./src/badge.tsx"];
