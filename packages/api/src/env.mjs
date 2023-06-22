@@ -8,6 +8,8 @@ export const env = createEnv({
       MINIO_SECRET_ACCESS_KEY: z.string(),
       MINIO_BUCKET: z.string().default("laundrey"),
       MINIO_URL: z.string(),
+      MINIO_PROTOCOL: z.enum(["http", "https"]),
+      MINIO_PORT: z.string().default("443"),
    },
    client: {},
    runtimeEnv: {
@@ -16,6 +18,8 @@ export const env = createEnv({
       MINIO_SECRET_ACCESS_KEY: process.env.MINIO_SECRET_ACCESS_KEY,
       MINIO_BUCKET: process.env.MINIO_BUCKET,
       MINIO_URL: process.env.MINIO_URL,
+      MINIO_PROTOCOL: process.env.MINIO_PROTOCOL,
+      MINIO_PORT: process.env.MINIO_PORT,
    },
    skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 });

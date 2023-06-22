@@ -23,6 +23,8 @@ const ACCEPTED_IMAGE_TYPES = [
    "image/heif",
 ];
 
+export const byIdClothingValidator = z.object({ id: z.string().uuid() });
+
 export const clothingValidator = z.object({
    name: z.string(),
    brand: z.string().optional(),

@@ -8,6 +8,7 @@ import { prisma } from "@laundrey/db";
 import { Badge } from "@laundrey/ui/badge";
 
 import AppLayout from "~/app/layout/app-layout";
+import DeleteButton from "./delete-button";
 import ImageViewer from "./image-viewer";
 
 export async function generateMetadata(params: {
@@ -33,14 +34,17 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
    return (
       <AppLayout title={clothing.name} className="max-w-3xl">
-         <div className="lg:flex">
+         <div className="gap-4 lg:flex">
             <div className="lg:w-2/3">
-               <div className="mb-4 mt-1">
-                  {clothing.categories.map((category, index) => (
-                     <Badge key={index}>{category.name}</Badge>
-                  ))}
+               <div className="mr-4 mt-1 flex items-end justify-between">
+                  <div>
+                     {clothing.categories.map((category, index) => (
+                        <Badge key={index}>{category.name}</Badge>
+                     ))}
+                  </div>
+                  <DeleteButton id={clothing.id} />
                </div>
-               <div className="mb-2 mt-3 border-t-2 dark:border-gray-400 lg:mr-4" />
+               <div className="mb-2 mt-2 border-t-2 dark:border-gray-400 lg:mr-4" />
                <h1>Brand: {clothing.brand}</h1>
                <h1>Quantity: {clothing.quantity.toString()}</h1>
                <h1>Date Added: {clothing.created.toDateString()}</h1>

@@ -26,7 +26,8 @@ const ImageViewer: React.FC<{ photo: string; index: number }> = ({
                   alt={`Photo #${index + 1}`}
                   width={500}
                   height={300}
-                  className="h-64 object-cover"
+                  className="h-64 cursor-pointer object-cover"
+                  title="Click to view full screen"
                />
             </DialogTrigger>
             <DialogContent>

@@ -168,11 +168,17 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
                <FormField
                   control={form.control}
                   name="quantity"
-                  render={({ field }) => (
+                  render={({ field: { onChange, ...rest } }) => (
                      <FormItem>
                         <FormLabel>Quantity</FormLabel>
                         <FormControl>
-                           <Input type="number" {...field} />
+                           <Input
+                              type="number"
+                              onChange={(e) =>
+                                 onChange(parseInt(e.target.value))
+                              }
+                              {...rest}
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>

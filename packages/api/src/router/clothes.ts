@@ -3,7 +3,11 @@ import { PostPolicyResult } from "minio";
 import { v4 } from "uuid";
 import { z } from "zod";
 
-import { clothingValidator, serverPhotoValidator } from "../../validators";
+import {
+   byIdClothingValidator,
+   clothingValidator,
+   serverPhotoValidator,
+} from "../../validators";
 import { env } from "../env.mjs";
 import { minio } from "../lib/minio";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
@@ -55,7 +59,8 @@ export const clothesRouter = createTRPCRouter({
                   connect: foundCategories,
                },
                photos: photoKeys?.map(
-                  (s) => `https://${env.MINIO_URL}/${env.MINIO_BUCKET}/${s}`,
+                  (s) =>
+                     `${env.MINIO_PROTOCOL}://${env.MINIO_URL}/${env.MINIO_BUCKET}/${s}`,
                ),
             },
          });
@@ -82,7 +87,7 @@ export const clothesRouter = createTRPCRouter({
          return true;
       }),
    get: protectedProcedure
-      .input(z.object({ id: z.string().uuid() }))
+      .input(byIdClothingValidator)
       .query(async ({ ctx, input }) => {
          return await ctx.prisma.clothing.findFirst({
             where: { id: input.id, userId: ctx.session.id },
@@ -90,5 +95,34 @@ export const clothesRouter = createTRPCRouter({
                categories: true,
             },
          });
+      }),
+   delete: protectedProcedure
+      .input(byIdClothingValidator)
+      .mutation(async ({ ctx, input }) => {
+         const clothing = await ctx.prisma.clothing.findFirst({
+            where: { id: input.id, userId: ctx.session.id },
+         });
+
+         if (!clothing)
+            throw new TRPCError({
+               message: "You do not have this clothing!",
+               code: "BAD_REQUEST",
+            });
+
+         await ctx.prisma.clothing.delete({
+            where: { id: clothing.id },
+         });
+
+         if (clothing.photos.length !== 0) {
+            const photoKeys = clothing.photos.map(
+               (photo) =>
+                  photo.split(
+                     `${env.MINIO_PROTOCOL}://${env.MINIO_URL}/${env.MINIO_BUCKET}/`,
+                  )[1]!,
+            );
+            await minio.removeObjects(env.MINIO_BUCKET, photoKeys);
+         }
+
+         return true;
       }),
 });
