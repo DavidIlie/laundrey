@@ -16,6 +16,7 @@
       "@trpc/client": "^10.30.0",
       "@trpc/server": "^10.30.0",
       "argon2": "^0.30.3",
+      "date-fns": "^2.30.0",
       "jsonwebtoken": "^9.0.0",
       "minio": "^7.1.1",
       "superjson": "1.9.1",

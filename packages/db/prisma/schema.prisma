@@ -27,19 +27,18 @@ model User {
 
 model LaundryEvent {
     id          String        @id @default(uuid())
-    clothes     Clothing[]
     created     DateTime      @default(now())
+    finished    DateTime?
     userId      String
     user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-    LaundryItem LaundryItem[]
+    laundryItem LaundryItem[]
 }
 
 model LaundryItem {
     id           String       @id @default(uuid())
     clothingId   String
     clothing     Clothing     @relation(fields: [clothingId], references: [id], onDelete: Cascade)
-    created      DateTime     @default(now())
-    finished     DateTime?
+    returned     DateTime?
     eventId      String
     laundryEvent LaundryEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
     quantity     BigInt       @default(1)
@@ -66,17 +65,15 @@ model Brand {
 }
 
 model Clothing {
-    id             String        @id @default(uuid())
-    userId         String
-    user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-    name           String
-    photos         String[]
-    laundryEventId String?
-    created        DateTime      @default(now())
-    LaundryEvent   LaundryEvent? @relation(fields: [laundryEventId], references: [id], onDelete: Cascade)
-    categories     Category[]
-    LaundryItem    LaundryItem[]
-    quantity       BigInt        @default(1)
-    brand          Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
-    brandId        String?
+    id          String        @id @default(uuid())
+    userId      String
+    user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+    name        String
+    photos      String[]
+    created     DateTime      @default(now())
+    categories  Category[]
+    LaundryItem LaundryItem[]
+    quantity    BigInt        @default(1)
+    brand       Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+    brandId     String?
 }

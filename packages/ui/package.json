@@ -134,6 +134,10 @@
     "./badge": {
       "import": "./dist/badge.mjs",
       "types": "./dist/badge.d.ts"
+    },
+    "./card": {
+      "import": "./dist/card.mjs",
+      "types": "./dist/card.d.ts"
     }
   },
   "typesVersions": {
@@ -197,6 +201,9 @@
       ],
       "table": [
         "dist/table.d.ts"
+      ],
+      "card": [
+        "dist/card.d.ts"
       ]
     }
   }

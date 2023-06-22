@@ -253,6 +253,9 @@ importers:
       argon2:
         specifier: ^0.30.3
         version: 0.30.3
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
       jsonwebtoken:
         specifier: ^9.0.0
         version: 9.0.0
