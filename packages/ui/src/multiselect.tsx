@@ -13,8 +13,7 @@ const MultiSelect: React.FC<{
    data: Element[];
    onChange: (...event: any[]) => void;
    value: string[] | undefined;
-   placeholder: string;
-}> = ({ data, onChange, value: propValue = [], placeholder }) => {
+}> = ({ data, onChange, value: propValue = [] }) => {
    const inputRef = React.useRef<HTMLInputElement>(null);
    const [open, setOpen] = React.useState(false);
    const [inputValue, setInputValue] = React.useState("");
@@ -85,7 +84,6 @@ const MultiSelect: React.FC<{
                   onValueChange={setInputValue}
                   onBlur={() => setOpen(false)}
                   onFocus={() => setOpen(true)}
-                  placeholder={placeholder}
                   className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
                />
             </div>

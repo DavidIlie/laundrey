@@ -73,11 +73,7 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
                   <FormItem>
                      <FormLabel>Category</FormLabel>
                      <FormControl>
-                        <MultiSelect
-                           data={categories}
-                           placeholder="Select categories..."
-                           {...field}
-                        />
+                        <MultiSelect data={categories} {...field} />
                      </FormControl>
                      <FormMessage />
                   </FormItem>
