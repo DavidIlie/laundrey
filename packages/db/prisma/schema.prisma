@@ -41,6 +41,7 @@ model LaundryItem {
     finished     DateTime?
     eventId      String
     laundryEvent LaundryEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
+    quantity     BigInt       @default(1)
 }
 
 model Category {
@@ -65,4 +66,5 @@ model Clothing {
     LaundryEvent   LaundryEvent? @relation(fields: [laundryEventId], references: [id])
     categories     Category[]
     LaundryItem    LaundryItem[]
+    quantity       BigInt        @default(1)
 }

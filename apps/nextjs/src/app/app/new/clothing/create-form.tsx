@@ -40,6 +40,9 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
 
    const form = useZodForm({
       schema: joinedValidator,
+      defaultValues: {
+         quantity: 1,
+      },
    });
 
    const watchPhotos = form.watch("photos");
@@ -67,13 +70,16 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
                         name: values.name,
                         brand: values.brand,
                         category: values.category,
+                        quantity: values.quantity,
                         photos: values.photos?.map((s) => s.name),
                      });
 
                      if (Array.isArray(mutation)) {
                         await Promise.all(
-                           mutation.map(async (s, index) => {
-                              const file = values.photos![index]!;
+                           mutation.map(async (s) => {
+                              const file = values.photos!.filter(
+                                 (b) => b.name === s.fileName,
+                              )[0]!;
 
                               const formData = new FormData();
                               formData.append("Content-Type", file.type);
@@ -154,6 +160,19 @@ const CreateForm: React.FC<{ categories: Category[] }> = ({
                         <FormLabel>Category</FormLabel>
                         <FormControl>
                            <MultiSelect data={categories} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                     </FormItem>
+                  )}
+               />
+               <FormField
+                  control={form.control}
+                  name="quantity"
+                  render={({ field }) => (
+                     <FormItem>
+                        <FormLabel>Quantity</FormLabel>
+                        <FormControl>
+                           <Input type="number" {...field} />
                         </FormControl>
                         <FormMessage />
                      </FormItem>

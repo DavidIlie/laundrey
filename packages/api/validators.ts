@@ -27,6 +27,7 @@ export const clothingValidator = z.object({
    name: z.string(),
    brand: z.string().optional(),
    category: z.array(z.string().uuid()).optional(),
+   quantity: z.number(),
 });
 
 export const clientPhotoValidator = z.object({

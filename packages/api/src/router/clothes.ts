@@ -7,6 +7,10 @@ import { env } from "../env.mjs";
 import { minio } from "../lib/minio";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
+type PresignedURL = PostPolicyResult & {
+   fileName: string;
+};
+
 export const clothesRouter = createTRPCRouter({
    all: protectedProcedure.query(async ({ ctx }) => {
       return await ctx.prisma.clothing.findMany({
@@ -45,6 +49,7 @@ export const clothesRouter = createTRPCRouter({
                userId: ctx.session.id,
                name: input.name,
                brand: input.brand,
+               quantity: input.quantity,
                categories: {
                   connect: foundCategories,
                },
@@ -54,7 +59,7 @@ export const clothesRouter = createTRPCRouter({
             },
          });
 
-         let presignedUrls: PostPolicyResult[] = [];
+         let presignedUrls: PresignedURL[] = [];
 
          if (input.photos)
             await Promise.all(
@@ -64,7 +69,10 @@ export const clothesRouter = createTRPCRouter({
                   policy.setBucket(env.MINIO_BUCKET);
 
                   const presignedUrl = await minio.presignedPostPolicy(policy);
-                  presignedUrls.push(presignedUrl);
+                  presignedUrls.push({
+                     ...presignedUrl,
+                     fileName: input.photos![index]!,
+                  });
                }),
             );
 
