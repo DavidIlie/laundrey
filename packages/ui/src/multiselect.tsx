@@ -5,7 +5,7 @@ import { Command as CommandPrimitive } from "cmdk";
 import { X } from "lucide-react";
 
 import { Badge } from "./badge";
-import { Command, CommandGroup, CommandItem } from "./command";
+import { Command, CommandEmpty, CommandGroup, CommandItem } from "./command";
 
 type Element = Record<"value" | "label", string>;
 
@@ -89,7 +89,7 @@ const MultiSelect: React.FC<{
             </div>
          </div>
          <div className="relative">
-            {open && selectables.length > 0 ? (
+            {open && (
                <div className="absolute top-2 w-full rounded-md border bg-popover text-popover-foreground shadow-md outline-none animate-in">
                   <CommandGroup className="h-full overflow-auto">
                      {selectables.map((element) => {
@@ -110,8 +110,9 @@ const MultiSelect: React.FC<{
                         );
                      })}
                   </CommandGroup>
+                  <CommandEmpty>No item found.</CommandEmpty>
                </div>
-            ) : null}
+            )}
          </div>
       </Command>
    );

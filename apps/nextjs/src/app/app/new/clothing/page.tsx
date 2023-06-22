@@ -10,7 +10,7 @@ const Page = async () => {
       <AppLayout
          title="New Clothing"
          description="Add a new piece of clothing to Laundrey"
-         className="max-w-md"
+         className="max-w-2xl"
       >
          <CreateForm categories={categories} />
       </AppLayout>

@@ -50,12 +50,11 @@ model Category {
     clothes     Clothing[]
     name        String
     description String?
-    tags        String?
     created     DateTime   @default(now())
 }
 
 model Clothing {
-    id             String        @id @default(nanoid())
+    id             String        @id @default(uuid())
     userId         String
     user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     name           String

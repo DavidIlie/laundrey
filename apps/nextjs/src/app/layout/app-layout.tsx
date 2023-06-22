@@ -9,7 +9,7 @@ const AppLayout: React.FC<{
    className?: string;
 }> = ({ title, description, children, className }) => {
    return (
-      <div className="px-1 sm:px-0">
+      <div className="px-1 lg:px-0">
          <h1 className="text-2xl font-semibold">{title}</h1>
          {description && (
             <p className="text-sm text-gray-500 dark:text-gray-400">

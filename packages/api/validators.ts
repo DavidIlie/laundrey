@@ -14,9 +14,40 @@ export const loginValidator = z.object({
    remember: z.boolean(),
 });
 
-export const categoryValidator = z.object({
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = [
+   "image/jpeg",
+   "image/jpg",
+   "image/png",
+   "image/webp",
+   "image/heif",
+];
+
+export const clothingValidator = z.object({
    name: z.string(),
-   description: z.string().optional(),
-   tags: z.array(z.string()).optional(),
-   category: z.array(z.string()).optional(),
+   brand: z.string().optional(),
+   category: z.array(z.string().uuid()).optional(),
+});
+
+export const clientPhotoValidator = z.object({
+   photos: z
+      .array(z.custom<File>())
+      .refine(
+         (files) => files.every((file) => file instanceof File),
+         "Expected a file.",
+      )
+      .refine(
+         (files) => files.every((file) => file.size <= MAX_FILE_SIZE),
+         `File size should be less than 5MB.`,
+      )
+      .refine(
+         (files) =>
+            files.every((file) => ACCEPTED_IMAGE_TYPES.includes(file.type)),
+         "Only these types are allowed .jpg, .jpeg, .png and .webp",
+      )
+      .optional(),
+});
+
+export const serverPhotoValidator = z.object({
+   photos: z.array(z.string()).optional(),
 });
