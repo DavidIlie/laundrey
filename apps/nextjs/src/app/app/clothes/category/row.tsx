@@ -23,7 +23,9 @@ const Row: React.FC<{ category: RouterOutputs["categories"]["all"][0] }> = ({
    return (
       <TableRow>
          <TableCell className="font-medium">{category.name}</TableCell>
-         <TableCell>{category.description || "No description..."}</TableCell>
+         <TableCell className="max-w-[15rem] truncate lg:max-w-[25rem]">
+            {category.description || "No description..."}
+         </TableCell>
          <TableCell>{category._count.clothes}</TableCell>
          <TableCell className="hidden text-right lg:block">
             {formatDistance(category.created, new Date(), {

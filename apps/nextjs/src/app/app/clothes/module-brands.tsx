@@ -20,8 +20,8 @@ const BrandsModule = async () => {
          <Table>
             <TableHeader>
                <TableRow>
-                  <TableHead className="w-[200px]">Name</TableHead>
-                  <TableHead>Description</TableHead>
+                  <TableHead className="w-[150px]">Name</TableHead>
+                  <TableHead className="w-[200px]">Description</TableHead>
                   <TableHead className="w-[200px]"># of Clothes</TableHead>
                   <TableHead className="hidden text-right lg:table-cell">
                      Added

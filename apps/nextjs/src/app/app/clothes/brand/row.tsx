@@ -23,7 +23,9 @@ const Row: React.FC<{ brand: RouterOutputs["brands"]["all"][0] }> = ({
    return (
       <TableRow>
          <TableCell className="font-medium">{brand.name}</TableCell>
-         <TableCell>{brand.description || "No description..."}</TableCell>
+         <TableCell className="max-w-[15rem] truncate lg:max-w-[25rem]">
+            {brand.description || "No description..."}
+         </TableCell>
          <TableCell>{brand._count.clothes}</TableCell>
          <TableCell className="hidden text-right lg:block">
             {formatDistance(brand.created, new Date(), {
