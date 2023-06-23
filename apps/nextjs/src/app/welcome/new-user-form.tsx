@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TRPCError } from "@trpc/server";
 import { setCookie } from "cookies-next";
@@ -21,20 +22,23 @@ import {
    FormLabel,
    FormMessage,
 } from "@laundrey/ui/form";
+import { Spinner } from "@laundrey/ui/icons";
 import { Input } from "@laundrey/ui/input";
 import { useToast } from "@laundrey/ui/use-toast";
 
 const NewUserForm: React.FC = () => {
+   const [loading, setLoading] = useState(false);
    const form = useZodForm({ schema: newAdminUserValidator });
    const { toast } = useToast();
-   const router = useRouter();
    const { update } = useSession();
+   const router = useRouter();
 
    return (
       <Form {...form}>
          <form
             onSubmit={form.handleSubmit(
                async (values: z.infer<typeof newAdminUserValidator>) => {
+                  setLoading(true);
                   try {
                      const mutation = await api.user.createFirstUser.mutate(
                         values,
@@ -45,7 +49,9 @@ const NewUserForm: React.FC = () => {
                      setCookie("access", mutation.accessToken, { maxAge });
                      update(mutation.session);
                      router.push("/app");
+                     setLoading(false);
                   } catch (error) {
+                     setLoading(false);
                      return toast({
                         variant: "destructive",
                         title: "Uh oh! Something went wrong.",
@@ -106,7 +112,14 @@ const NewUserForm: React.FC = () => {
                   </FormItem>
                )}
             />
-            <Button type="submit">Create Account</Button>
+            <Button
+               type="submit"
+               disabled={loading}
+               className="flex items-center gap-2"
+            >
+               {loading && <Spinner className="animate-spin" />}
+               {loading ? "Creating Account" : "Create Account"}
+            </Button>
             <p className="text-sm text-gray-500 dark:text-gray-400">
                You can always modify this later.
             </p>

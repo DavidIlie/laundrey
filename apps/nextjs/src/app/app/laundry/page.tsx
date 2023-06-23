@@ -25,7 +25,7 @@ const Page = async () => {
    return (
       <AppLayout title="Laundry">
          <Button className="mb-3">New Event</Button>
-         <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
+         <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             {events.map((event) => (
                <li key={event.id}>
                   <Link href={`/app/laundry/${event.id}`}>

@@ -29,6 +29,7 @@ model LaundryEvent {
     id          String        @id @default(uuid())
     created     DateTime      @default(now())
     finished    DateTime?
+    done        Boolean
     userId      String
     user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     laundryItem LaundryItem[]

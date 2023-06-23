@@ -21,7 +21,30 @@ export const laundryRouter = createTRPCRouter({
       .query(async ({ ctx, input }) => {
          return await ctx.prisma.laundryEvent.findFirst({
             where: { id: input.id, userId: ctx.session.id },
-            include: { laundryItem: true },
+            include: {
+               laundryItem: {
+                  include: {
+                     clothing: {
+                        include: { categories: true, brand: true },
+                     },
+                  },
+               },
+            },
          });
+      }),
+   inLaundry: protectedProcedure
+      .input(findByIdValidator)
+      .query(async ({ ctx, input }) => {
+         return !!(await ctx.prisma.laundryItem.findFirst({
+            where: {
+               clothingId: input.id,
+               AND: { laundryEvent: { done: false } },
+            },
+            orderBy: {
+               laundryEvent: {
+                  created: "desc",
+               },
+            },
+         }));
       }),
 });
