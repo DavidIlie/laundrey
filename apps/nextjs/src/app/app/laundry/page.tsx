@@ -24,7 +24,9 @@ const Page = async () => {
    const events = await api.laundry.all.query();
    return (
       <AppLayout title="Laundry">
-         <Button className="mb-3">New Event</Button>
+         <Link href="/app/new/laundry">
+            <Button className="mb-3">New Event</Button>
+         </Link>
          <ul className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             {events.map((event) => (
                <li key={event.id}>

@@ -22,6 +22,12 @@ export const clothesRouter = createTRPCRouter({
          include: { categories: true, brand: true },
       });
    }),
+   allForLaundry: protectedProcedure.query(async ({ ctx }) => {
+      return await ctx.prisma.clothing.findMany({
+         where: { userId: ctx.session.id },
+         select: { id: true, name: true, photos: true },
+      });
+   }),
    create: protectedProcedure
       .input(clothingValidator.and(serverPhotoValidator))
       .mutation(async ({ ctx, input }) => {

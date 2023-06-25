@@ -29,7 +29,6 @@ model LaundryEvent {
     id          String        @id @default(uuid())
     created     DateTime      @default(now())
     finished    DateTime?
-    done        Boolean
     userId      String
     user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     laundryItem LaundryItem[]
@@ -42,7 +41,7 @@ model LaundryItem {
     returned     DateTime?
     eventId      String
     laundryEvent LaundryEvent @relation(fields: [eventId], references: [id], onDelete: Cascade)
-    quantity     BigInt       @default(1)
+    quantity     Int          @default(1)
 }
 
 model Category {
@@ -74,7 +73,7 @@ model Clothing {
     created     DateTime      @default(now())
     categories  Category[]
     LaundryItem LaundryItem[]
-    quantity    BigInt        @default(1)
+    quantity    Int           @default(1)
     brand       Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
     brandId     String?
 }

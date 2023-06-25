@@ -31,3 +31,4 @@ export const Key = Lucide.Key;
 export const Shirt = Lucide.Shirt;
 export const ShoppingBag = Lucide.ShoppingBag;
 export const Down = Lucide.ArrowDown;
+export const CalendarIcon = Lucide.CalendarIcon;

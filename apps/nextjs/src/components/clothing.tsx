@@ -13,6 +13,8 @@ const Clothing: React.FC<{
 }> = async ({ clothing, children }) => {
    const isInLaundry = await api.laundry.inLaundry.query({ id: clothing.id });
 
+   console.log("isInLaundry", isInLaundry);
+
    return (
       <div className="w-full rounded-md bg-white p-4 shadow-md dark:bg-gray-800 md:max-w-[18rem]">
          <Link href={`/app/clothing/${clothing.id}`}>

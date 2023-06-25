@@ -128,6 +128,7 @@ const CreateForm: React.FC<{
                         description: "Created successfully!",
                      });
                   } catch (error) {
+                     setLoading(false);
                      return toast({
                         variant: "destructive",
                         title: "Uh oh! Something went wrong.",

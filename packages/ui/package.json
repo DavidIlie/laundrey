@@ -123,6 +123,10 @@
       "import": "./dist/table.mjs",
       "types": "./dist/table.d.ts"
     },
+    "./calendar": {
+      "import": "./dist/calendar.mjs",
+      "types": "./dist/calendar.d.ts"
+    },
     "./button": {
       "import": "./dist/button.mjs",
       "types": "./dist/button.d.ts"
@@ -204,6 +208,9 @@
       ],
       "card": [
         "dist/card.d.ts"
+      ],
+      "calendar": [
+        "dist/calendar.d.ts"
       ]
     }
   }

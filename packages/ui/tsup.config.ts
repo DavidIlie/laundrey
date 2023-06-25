@@ -19,6 +19,7 @@ const client = [
    "./src/dialog.tsx",
    "./src/tabs.tsx",
    "./src/table.tsx",
+   "./src/calendar.tsx",
 ];
 
 const server = [

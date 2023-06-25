@@ -59,3 +59,13 @@ export const clientPhotoValidator = z.object({
 export const serverPhotoValidator = z.object({
    photos: z.array(z.string()).optional(),
 });
+
+export const laundryItemValidator = z.object({
+   quantity: z.number(),
+   clothingId: z.string().uuid(),
+});
+
+export const laundryEventValidator = z.object({
+   created: z.date().default(new Date()),
+   items: z.array(laundryItemValidator),
+});

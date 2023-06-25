@@ -7,10 +7,11 @@ import { getServerSession } from "~/lib/getServerSession";
 
 import { createLaundryEventName } from "@laundrey/api/client";
 import { prisma } from "@laundrey/db";
-import { Button } from "@laundrey/ui/button";
 
 import Clothing from "~/components/clothing";
 import AppLayout from "~/app/layout/app-layout";
+import DeleteItem from "./delete-item";
+import FinishItem from "./finish-item";
 
 export async function generateMetadata(params: {
    id: string;
@@ -37,9 +38,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
    return (
       <AppLayout title={createLaundryEventName(event.created)}>
-         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            {event.laundryItem.map((item, index) => (
-               <Clothing clothing={item.clothing} key={index}>
+         <div className="grid grid-cols-1 space-y-4 sm:grid-cols-2 sm:space-y-0 lg:grid-cols-4">
+            {event.laundryItem.map((item) => (
+               <Clothing clothing={item.clothing} key={item.id}>
                   {item.returned && (
                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         Returned{" "}
@@ -49,10 +50,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
                      </p>
                   )}
                   <div className="mt-2 flex items-center gap-2">
-                     <Button className="w-full">Finish</Button>
-                     <Button className="w-full" variant="destructive">
-                        Delete
-                     </Button>
+                     <FinishItem id={item.id} returned={item.returned} />
+                     <DeleteItem id={item.id} />
                   </div>
                </Clothing>
             ))}
