@@ -19,7 +19,6 @@ const DeleteItem: React.FC<{ id: string }> = ({ id }) => {
             if (!confirm("Are you sure you want to do this?")) return;
             setLoading(true);
             try {
-               console.log("hey");
                await api.laundry.removeItem.mutate({ id });
                router.refresh();
                setLoading(false);

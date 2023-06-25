@@ -38,7 +38,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
    return (
       <AppLayout title={createLaundryEventName(event.created)}>
-         <div className="grid grid-cols-1 space-y-4 sm:grid-cols-2 sm:space-y-0 lg:grid-cols-4">
+         <div className="grid grid-cols-1 gap-2 space-y-4 sm:grid-cols-2 sm:space-y-0 lg:grid-cols-4">
             {event.laundryItem.map((item) => (
                <Clothing clothing={item.clothing} key={item.id}>
                   {item.returned && (

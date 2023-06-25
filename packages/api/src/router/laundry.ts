@@ -123,6 +123,9 @@ export const laundryRouter = createTRPCRouter({
                   },
                },
             },
+            include: {
+               laundryEvent: true,
+            },
          });
 
          if (!laundryItem)
@@ -132,6 +135,18 @@ export const laundryRouter = createTRPCRouter({
             });
 
          await ctx.prisma.laundryItem.delete({ where: { id: laundryItem.id } });
+
+         const laundryEvent = await ctx.prisma.laundryEvent.findFirst({
+            where: { id: laundryItem.laundryEvent.id },
+            include: { laundryItem: true },
+         });
+
+         if (!laundryEvent) throw new Error("impossible");
+
+         if (laundryEvent.laundryItem.length === 0)
+            await ctx.prisma.laundryEvent.delete({
+               where: { id: laundryItem.laundryEvent.id },
+            });
 
          return true;
       }),

@@ -13,7 +13,7 @@ const ClothesModule = async () => {
          <Link href="/app/new/clothing">
             <Button className="mb-3">Add new</Button>
          </Link>
-         <div className="grid grid-cols-1 space-y-4 sm:grid-cols-2 sm:space-y-0 lg:grid-cols-4">
+         <div className="grid grid-cols-1 gap-2 space-y-4 sm:grid-cols-2 sm:space-y-0 lg:grid-cols-4">
             {clothes.map((clothing, index) => (
                <Clothing clothing={clothing} key={index} />
             ))}
