@@ -23,7 +23,10 @@ const Row: React.FC<{ category: RouterOutputs["categories"]["all"][0] }> = ({
    return (
       <TableRow>
          <TableCell className="font-medium">{category.name}</TableCell>
-         <TableCell className="max-w-[15rem] truncate lg:max-w-[25rem]">
+         <TableCell
+            className="max-w-[15rem] truncate lg:max-w-[25rem]"
+            title={category.description || "No description.."}
+         >
             {category.description || "No description..."}
          </TableCell>
          <TableCell>{category._count.clothes}</TableCell>

@@ -23,7 +23,10 @@ const Row: React.FC<{ brand: RouterOutputs["brands"]["all"][0] }> = ({
    return (
       <TableRow>
          <TableCell className="font-medium">{brand.name}</TableCell>
-         <TableCell className="max-w-[15rem] truncate lg:max-w-[25rem]">
+         <TableCell
+            className="max-w-[15rem] truncate lg:max-w-[25rem]"
+            title={brand.description || "No description.."}
+         >
             {brand.description || "No description..."}
          </TableCell>
          <TableCell>{brand._count.clothes}</TableCell>
