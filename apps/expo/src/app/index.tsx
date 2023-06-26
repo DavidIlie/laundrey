@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Page = () => {
@@ -8,9 +8,9 @@ const Page = () => {
          <View>
             <Text>Laundrey</Text>
             <View></View>
-            <Pressable>
+            <TouchableOpacity>
                <Text>Use custom server URL</Text>
-            </Pressable>
+            </TouchableOpacity>
          </View>
       </SafeAreaView>
    );
