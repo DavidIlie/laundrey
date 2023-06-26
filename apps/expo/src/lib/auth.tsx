@@ -180,7 +180,11 @@ const Login = () => {
                   render={({ field }) => (
                      <FormItem>
                         <Label>Email</Label>
-                        <Input {...field} autoCapitalize="none" />
+                        <Input
+                           {...field}
+                           autoCapitalize="none"
+                           textContentType="emailAddress"
+                        />
                         <FormMessage error={form.formState.errors.email} />
                      </FormItem>
                   )}
@@ -196,6 +200,7 @@ const Login = () => {
                            {...field}
                            autoCapitalize="none"
                            secureTextEntry
+                           textContentType="password"
                         />
                         <FormMessage error={form.formState.errors.password} />
                      </FormItem>

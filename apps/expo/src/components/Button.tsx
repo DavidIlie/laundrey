@@ -7,7 +7,7 @@ const Button = React.forwardRef<TouchableOpacity, TouchableOpacityProps>(
       <TouchableOpacity
          {...props}
          ref={ref}
-         className={`${props.className} inline-flex h-10 items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium disabled:pointer-events-none disabled:opacity-50`}
+         className={`${props.className} inline-flex h-10 items-center justify-center rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-medium disabled:pointer-events-none disabled:opacity-50`}
       >
          {props.children}
       </TouchableOpacity>
