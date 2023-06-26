@@ -10,7 +10,7 @@ const Input = React.forwardRef<TextInput, TextInputProps>(
          onChangeText={onChange}
          {...rest}
          ref={ref}
-         className="flex h-10 rounded-md border border-gray-200 px-3 py-2 text-sm ring-offset-background disabled:opacity-50"
+         className="flex h-10 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm ring-offset-background disabled:opacity-50"
       />
    ),
 );

@@ -29,7 +29,11 @@ export const createTRPCContext = async (opts: FetchCreateContextFnOptions) => {
    try {
       let authCookie = opts.req.headers.get("cookie");
       authCookie = authCookie?.split("access=")[1] as string | null;
-      if (!authCookie) return base;
+      if (!authCookie) {
+         // try for expo
+         authCookie = opts.req.headers.get("access");
+         if (!authCookie) return base;
+      }
 
       const user = await getServerSessionUser(authCookie);
 

@@ -38,7 +38,7 @@ export const useSession = (): UserContextValue => {
    const value: SessionContextValue<R> = useContext(UserContext);
    if (!value && process.env.NODE_ENV !== "production") {
       throw new Error(
-         "[next-auth]: `useSession` must be wrapped in a <SessionProvider />",
+         "[auth]: `useSession` must be wrapped in a <SessionProvider />",
       );
    }
 
