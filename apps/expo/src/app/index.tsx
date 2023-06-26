@@ -1,16 +1,23 @@
 import React from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Controller } from "react-hook-form";
+
+import { api } from "~/lib/api";
 
 import { useZodForm } from "@laundrey/api/form";
 import { loginValidator } from "@laundrey/api/validators";
 
+import { FormItem, FormMessage } from "~/components/form";
 import Input from "~/components/Input";
+import Label from "~/components/Label";
 import Logo from "~/components/Logo";
 
 const Page = () => {
    const form = useZodForm({ schema: loginValidator });
+
+   const loginMutation = api.user.login.useMutation();
+
    return (
       <>
          <SafeAreaView className="flex h-screen w-full items-center justify-center">
@@ -24,11 +31,11 @@ const Page = () => {
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                     <Input
-                        {...field}
-                        placeholder="Email"
-                        autoCapitalize="none"
-                     />
+                     <FormItem>
+                        <Label>Email</Label>
+                        <Input {...field} autoCapitalize="none" />
+                        <FormMessage error={form.formState.errors.email} />
+                     </FormItem>
                   )}
                />
                {form.formState.errors.email && (
@@ -40,12 +47,15 @@ const Page = () => {
                   control={form.control}
                   name="password"
                   render={({ field }) => (
-                     <Input
-                        {...field}
-                        placeholder="Password"
-                        autoCapitalize="none"
-                        secureTextEntry={true}
-                     />
+                     <FormItem>
+                        <Label>Password</Label>
+                        <Input
+                           {...field}
+                           autoCapitalize="none"
+                           secureTextEntry
+                        />
+                        <FormMessage error={form.formState.errors.password} />
+                     </FormItem>
                   )}
                />
                {form.formState.errors.password && (
