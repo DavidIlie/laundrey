@@ -9,13 +9,7 @@ const RootLayout = () => {
    return (
       <TRPCProvider>
          <SafeAreaProvider>
-            <Stack
-               screenOptions={{
-                  headerStyle: {
-                     backgroundColor: "#f472b6",
-                  },
-               }}
-            />
+            <Stack screenOptions={{ headerShown: false }} />
             <StatusBar />
          </SafeAreaProvider>
       </TRPCProvider>

@@ -1,16 +1,16 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Stack } from "expo-router";
 
 const Page = () => {
    return (
-      <SafeAreaView>
-         <Stack.Screen options={{ title: "Home Page" }} />
-         <View className="h-full w-full p-4">
-            <Text className="mx-auto pb-2 text-5xl font-bold text-white">
-               Create <Text className="text-pink-400">T3</Text> Turbo
-            </Text>
+      <SafeAreaView className="h-screen w-full">
+         <View>
+            <Text>Laundrey</Text>
+            <View></View>
+            <Pressable>
+               <Text>Use custom server URL</Text>
+            </Pressable>
          </View>
       </SafeAreaView>
    );
