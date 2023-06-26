@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import Constants from "expo-constants";
-import * as SecureStore from "expo-secure-store";
 import superjson from "superjson";
 
 import type { AppRouter } from "@laundrey/api";
@@ -11,18 +10,10 @@ import type { AppRouter } from "@laundrey/api";
 export const api = createTRPCReact<AppRouter>();
 export { type RouterInputs, type RouterOutputs } from "@laundrey/api";
 
-const getBaseUrl = async () => {
-   const storedUrl = await SecureStore.getItemAsync("api_url");
-   if (!__DEV__ && !storedUrl) {
-      await SecureStore.setItemAsync(
-         "api_url",
-         "https://laundrey.davidapps.dev",
-      );
-      return "https://laundrey.davidapps.dev";
-   }
-   if (storedUrl) return storedUrl;
+const getBaseUrl = () => {
    const localhost = Constants.manifest?.debuggerHost?.split(":")[0];
    if (!localhost) {
+      if (!__DEV__) return "https://laundrey.davidapps.dev";
       throw new Error(
          "Failed to get localhost. Please point to your production server.",
       );

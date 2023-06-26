@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import type { TRPCError } from "@trpc/server";
 
 import { api } from "~/trpc/client";
-import { useZodForm } from "~/lib/zod-form";
 
+import { useZodForm } from "@laundrey/api/form";
 import { brandAndCategoryValidator } from "@laundrey/api/validators";
 import type { Brand } from "@laundrey/db";
 import { Button } from "@laundrey/ui/button";

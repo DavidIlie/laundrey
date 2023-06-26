@@ -8,8 +8,8 @@ import type { z } from "zod";
 
 import type { RouterOutputs } from "~/trpc/client";
 import { api } from "~/trpc/client";
-import { useZodForm } from "~/lib/zod-form";
 
+import { useZodForm } from "@laundrey/api/form";
 import {
    clientPhotoValidator,
    clothingValidator,

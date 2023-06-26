@@ -3,7 +3,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-import { TRPCProvider } from "../lib/api";
+import { TRPCProvider } from "~/lib/api";
 
 const RootLayout = () => {
    return (

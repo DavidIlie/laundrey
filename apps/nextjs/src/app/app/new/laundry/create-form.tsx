@@ -8,8 +8,8 @@ import { format } from "date-fns";
 
 import { api } from "~/trpc/client";
 import type { RouterOutputs } from "~/trpc/shared";
-import { useZodForm } from "~/lib/zod-form";
 
+import { useZodForm } from "@laundrey/api/form";
 import { laundryEventValidator } from "@laundrey/api/validators";
 import { cn } from "@laundrey/ui";
 import { Button } from "@laundrey/ui/button";
