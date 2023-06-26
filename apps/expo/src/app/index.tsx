@@ -14,7 +14,10 @@ import Label from "~/components/Label";
 import Logo from "~/components/Logo";
 
 const Page = () => {
-   const form = useZodForm({ schema: loginValidator });
+   const form = useZodForm({
+      schema: loginValidator,
+      defaultValues: { remember: false },
+   });
 
    const loginMutation = api.user.login.useMutation();
 
@@ -38,11 +41,6 @@ const Page = () => {
                      </FormItem>
                   )}
                />
-               {form.formState.errors.email && (
-                  <Text className="text-red-500">
-                     {form.formState.errors.email.message}
-                  </Text>
-               )}
                <Controller
                   control={form.control}
                   name="password"
@@ -58,15 +56,11 @@ const Page = () => {
                      </FormItem>
                   )}
                />
-               {form.formState.errors.password && (
-                  <Text className="text-red-500">
-                     {form.formState.errors.password.message}
-                  </Text>
-               )}
                <Button
                   title="Submit"
                   onPress={form.handleSubmit(async (values) => {
-                     console.log(values);
+                     const res = await loginMutation.mutateAsync(values);
+                     console.log(res);
                   })}
                />
             </View>

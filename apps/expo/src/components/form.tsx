@@ -18,7 +18,7 @@ const FormMessage = React.forwardRef<
    (props, ref) =>
       props.error && (
          <Text
-            className="text-sm font-medium text-destructive"
+            className="text-sm font-medium text-red-500"
             {...props}
             ref={ref}
          >
