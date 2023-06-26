@@ -4,9 +4,9 @@ import "./src/env.mjs";
 const config = {
    reactStrictMode: true,
    transpilePackages: ["@laundrey/api", "@laundrey/db"],
-   // experimental: {
-   //    serverActions: true,
-   // },
+   experimental: {
+      serverActions: true,
+   },
    eslint: { ignoreDuringBuilds: true },
    typescript: { ignoreBuildErrors: true },
    images: {
