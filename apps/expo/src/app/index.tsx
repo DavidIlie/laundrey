@@ -22,50 +22,44 @@ const Page = () => {
    const loginMutation = api.user.login.useMutation();
 
    return (
-      <>
-         <SafeAreaView className="flex h-screen w-full items-center justify-center">
-            <View>
-               <Logo classes="text-2xl text-center" />
-               <Text className="text-xs text-gray-500">
-                  You need to log in in order to use Laundrey
-               </Text>
-               <View className="my-2" />
-               <Controller
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                     <FormItem>
-                        <Label>Email</Label>
-                        <Input {...field} autoCapitalize="none" />
-                        <FormMessage error={form.formState.errors.email} />
-                     </FormItem>
-                  )}
-               />
-               <Controller
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                     <FormItem>
-                        <Label>Password</Label>
-                        <Input
-                           {...field}
-                           autoCapitalize="none"
-                           secureTextEntry
-                        />
-                        <FormMessage error={form.formState.errors.password} />
-                     </FormItem>
-                  )}
-               />
-               <Button
-                  title="Submit"
-                  onPress={form.handleSubmit(async (values) => {
-                     const res = await loginMutation.mutateAsync(values);
-                     console.log(res);
-                  })}
-               />
-            </View>
-         </SafeAreaView>
-      </>
+      <SafeAreaView className="flex h-screen w-full items-center justify-center">
+         <View>
+            <Logo classes="text-2xl text-center" />
+            <Text className="text-xs text-gray-500">
+               You need to log in in order to use Laundrey
+            </Text>
+            <View className="my-2" />
+            <Controller
+               control={form.control}
+               name="email"
+               render={({ field }) => (
+                  <FormItem>
+                     <Label>Email</Label>
+                     <Input {...field} autoCapitalize="none" />
+                     <FormMessage error={form.formState.errors.email} />
+                  </FormItem>
+               )}
+            />
+            <Controller
+               control={form.control}
+               name="password"
+               render={({ field }) => (
+                  <FormItem>
+                     <Label>Password</Label>
+                     <Input {...field} autoCapitalize="none" secureTextEntry />
+                     <FormMessage error={form.formState.errors.password} />
+                  </FormItem>
+               )}
+            />
+            <Button
+               title="Submit"
+               onPress={form.handleSubmit(async (values) => {
+                  const res = await loginMutation.mutateAsync(values);
+                  console.log(res);
+               })}
+            />
+         </View>
+      </SafeAreaView>
    );
 };
 
