@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
    const { signOut } = useSession();
    const { colorScheme } = useColorScheme();
    return (
-      <View className="mt-4 space-y-3 px-2">
+      <View className="mt-4 space-y-2 px-2">
          <Button>
             <Text>Report a bug</Text>
          </Button>
