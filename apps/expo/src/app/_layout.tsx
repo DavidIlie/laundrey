@@ -10,6 +10,8 @@ import { TRPCProvider } from "~/lib/api";
 import { UserProvider } from "~/lib/auth";
 import { API_KEY } from "~/lib/constants";
 
+import { LoadingOverlay } from "~/components/LoadingOverlay";
+
 const RootLayout = () => {
    const [needApiUrl, setNeedApiUrl] = useState(false);
    const [inputtedApiUrl, setInputtedApiUrl] = useState("");
@@ -81,12 +83,14 @@ const RootLayout = () => {
 
    return (
       <TRPCProvider apiUrl={apiUrl}>
-         <UserProvider>
-            <SafeAreaProvider>
-               <Slot />
-               <StatusBar />
-            </SafeAreaProvider>
-         </UserProvider>
+         <LoadingOverlay>
+            <UserProvider>
+               <SafeAreaProvider>
+                  <Slot />
+                  <StatusBar />
+               </SafeAreaProvider>
+            </UserProvider>
+         </LoadingOverlay>
       </TRPCProvider>
    );
 };

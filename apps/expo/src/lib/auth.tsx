@@ -20,6 +20,7 @@ import Button from "~/components/Button";
 import { FormItem, FormMessage } from "~/components/form";
 import Input from "~/components/Input";
 import Label from "~/components/Label";
+import { useLoadingStore } from "~/components/LoadingOverlay";
 import Logo from "~/components/Logo";
 import { ACCESS_KEY, API_KEY } from "./constants";
 
@@ -74,7 +75,6 @@ export const useSession = (): UserContextValue => {
 };
 
 const fetchSession = async () => {
-   console.log("hey");
    const apiURL = await SecureStore.getItemAsync(API_KEY);
    const accessKey = await SecureStore.getItemAsync(ACCESS_KEY);
    const r = await fetch(`${apiURL}/api/trpc/user.session`, {
@@ -165,6 +165,8 @@ const Login = () => {
 
    const { update } = useSession();
 
+   const { toggleLoading } = useLoadingStore();
+
    return (
       <SafeAreaView className="flex h-screen w-full items-center justify-center">
          <View>
@@ -208,12 +210,15 @@ const Login = () => {
                />
                <Button
                   onPress={form.handleSubmit(async (values) => {
+                     toggleLoading();
                      const res = await loginMutation.mutateAsync(values);
+                     console.log(res);
                      await SecureStore.setItemAsync(
                         ACCESS_KEY,
                         res.accessToken,
                      );
                      update(res.session);
+                     toggleLoading();
                   })}
                >
                   <Text>Log In</Text>

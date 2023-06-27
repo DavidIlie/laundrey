@@ -34,7 +34,8 @@
       "react-native-dialog": "^9.3.0",
       "react-native-safe-area-context": "4.5.2",
       "react-native-screens": "~3.20.0",
-      "superjson": "1.9.1"
+      "superjson": "1.9.1",
+      "zustand": "^4.3.8"
    },
    "devDependencies": {
       "@babel/core": "^7.22.1",
