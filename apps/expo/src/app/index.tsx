@@ -9,7 +9,7 @@ const Page = () => {
 
    return (
       <SafeAreaView>
-         <Text>Hi, {user?.name}</Text>
+         <Text>Hi, {user.email}</Text>
          <TouchableOpacity onPress={() => signOut()}>
             <Text>Log out</Text>
          </TouchableOpacity>

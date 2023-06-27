@@ -5,14 +5,16 @@ import { prisma } from "@laundrey/db";
 import { env } from "../env.mjs";
 import { AccessTokenData } from "./token";
 
-export type User = {
+export type BaseUser = {
    id: string;
    name: string;
    username: string;
    email: string;
    image: string | null;
    isAdmin: boolean;
-} | null;
+};
+
+export type User = BaseUser | null;
 
 export const getServerSessionUser = async (cookie?: string) => {
    try {

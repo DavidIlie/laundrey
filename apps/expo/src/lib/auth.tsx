@@ -14,6 +14,7 @@ import { api } from "~/lib/api";
 
 import type { User } from "@laundrey/api/client";
 import { useZodForm } from "@laundrey/api/form";
+import type { BaseUser } from "@laundrey/api/src/lib/session-user";
 import { loginValidator } from "@laundrey/api/validators";
 
 import Button from "~/components/Button";
@@ -26,33 +27,12 @@ import { ACCESS_KEY, API_KEY } from "./constants";
 
 type UpdateSession = (data?: User) => User;
 
-export type UserContextValue<R extends boolean = false> = R extends true
-   ?
-        | {
-             update: UpdateSession;
-             user: User;
-             status: "authenticated";
-             signOut: () => void;
-          }
-        | {
-             update: UpdateSession;
-             user: null;
-             status: "loading";
-             signOut: () => void;
-          }
-   :
-        | {
-             update: UpdateSession;
-             user: User;
-             status: "authenticated";
-             signOut: () => void;
-          }
-        | {
-             update: UpdateSession;
-             user: null;
-             status: "unauthenticated" | "loading";
-             signOut: () => void;
-          };
+export type UserContextValue = {
+   update: UpdateSession;
+   user: BaseUser;
+   status: "authenticated" | "unauthenticated" | "loading";
+   signOut: () => void;
+};
 
 export const UserContext = createContext<UserContextValue | undefined>(
    undefined,
