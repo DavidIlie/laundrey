@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dialog from "react-native-dialog";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Constants from "expo-constants";
-import { Slot, SplashScreen } from "expo-router";
+import { SplashScreen, Stack, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 
@@ -10,7 +10,9 @@ import { TRPCProvider } from "~/lib/api";
 import { UserProvider } from "~/lib/auth";
 import { API_KEY } from "~/lib/constants";
 
+import CloseButton from "~/components/CloseButton";
 import { LoadingOverlay } from "~/components/LoadingOverlay";
+import { LeftMenu, RightMenu } from "~/components/Menu";
 
 const RootLayout = () => {
    const [needApiUrl, setNeedApiUrl] = useState(false);
@@ -86,7 +88,26 @@ const RootLayout = () => {
          <LoadingOverlay>
             <UserProvider>
                <SafeAreaProvider>
-                  <Slot />
+                  <Stack
+                     screenOptions={{
+                        headerLeft: LeftMenu,
+                        headerRight: RightMenu,
+                     }}
+                  >
+                     <Stack.Screen
+                        name="index"
+                        options={{ title: "Dashboard" }}
+                     />
+                     <Stack.Screen
+                        name="profile"
+                        options={{
+                           presentation: "modal",
+                           headerShown: true,
+                           title: "Profile",
+                           headerRight: CloseButton,
+                        }}
+                     />
+                  </Stack>
                   <StatusBar />
                </SafeAreaProvider>
             </UserProvider>

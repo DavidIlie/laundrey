@@ -13,7 +13,7 @@ export default async function RootLayout({
    if (!session) redirect("/");
 
    return (
-      <div className="flex min-h-screen flex-col lg:flex-row">
+      <div className="flex h-[20%] min-h-screen flex-col lg:flex-row">
          <Navigation />
          <div className="flex-grow bg-gray-50 px-2 py-4 dark:bg-container lg:min-h-screen lg:w-full lg:flex-grow-0 lg:p-6">
             {children}
