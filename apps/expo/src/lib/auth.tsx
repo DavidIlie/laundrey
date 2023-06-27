@@ -126,7 +126,12 @@ export const UserProvider = (props: UserProviderProps) => {
       [user, loading],
    );
 
-   if (loading && !user) return <View />;
+   if (loading && !user)
+      return (
+         <SafeAreaView>
+            <Text>Loading...</Text>
+         </SafeAreaView>
+      );
 
    return (
       <UserContext.Provider value={value as UserContextValue}>

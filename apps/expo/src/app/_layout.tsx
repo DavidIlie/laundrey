@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dialog from "react-native-dialog";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Constants from "expo-constants";
-import { SplashScreen, Stack, useRouter } from "expo-router";
+import { SplashScreen, Stack } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 
@@ -10,9 +10,12 @@ import { TRPCProvider } from "~/lib/api";
 import { UserProvider } from "~/lib/auth";
 import { API_KEY } from "~/lib/constants";
 
-import CloseButton from "~/components/CloseButton";
 import { LoadingOverlay } from "~/components/LoadingOverlay";
-import { LeftMenu, RightMenu } from "~/components/Menu";
+import { RightMenu } from "~/components/Menu";
+
+export const unstable_settings = {
+   initialRouteName: "app",
+};
 
 const RootLayout = () => {
    const [needApiUrl, setNeedApiUrl] = useState(false);
@@ -90,22 +93,13 @@ const RootLayout = () => {
                <SafeAreaProvider>
                   <Stack
                      screenOptions={{
-                        headerLeft: LeftMenu,
                         headerRight: RightMenu,
+                        title: "Laundrey",
                      }}
                   >
                      <Stack.Screen
-                        name="index"
-                        options={{ title: "Dashboard" }}
-                     />
-                     <Stack.Screen
                         name="profile"
-                        options={{
-                           presentation: "modal",
-                           headerShown: true,
-                           title: "Profile",
-                           headerRight: CloseButton,
-                        }}
+                        options={{ presentation: "modal", title: "Profile" }}
                      />
                   </Stack>
                   <StatusBar />

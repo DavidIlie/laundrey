@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
 
 import { useSession } from "~/lib/auth";
@@ -31,6 +32,7 @@ const Profile: React.FC = () => {
          <Text className="italic text-gray-500">
             More profile stuff coming soon
          </Text>
+         <StatusBar style="light" />
       </View>
    );
 };
