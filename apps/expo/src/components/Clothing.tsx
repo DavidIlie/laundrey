@@ -4,6 +4,7 @@ import { Image } from "expo-image";
 import { Link } from "expo-router";
 
 import { api } from "~/lib/api";
+import { blurhash } from "~/lib/blurhash";
 
 import type { RouterOutputs } from "@laundrey/api";
 
@@ -11,7 +12,7 @@ const Clothing: React.FC<{
    clothing: RouterOutputs["clothes"]["all"][0];
    children?: React.ReactNode;
 }> = ({ clothing, children }) => {
-   const { isLoading, data } = api.laundry.inLaundry.useQuery({
+   const { data } = api.laundry.inLaundry.useQuery({
       id: clothing.id,
    });
 
@@ -19,9 +20,13 @@ const Clothing: React.FC<{
       <View className="w-full rounded-md bg-white p-4 shadow-md">
          <Link href={`/app/clothing/${clothing.id}`} className="mb-2">
             <Image
-               source={
-                  clothing.photos[0] || "http://localhost:3000/no-photo.png"
-               }
+               source={{
+                  uri:
+                     clothing.photos[0] || "http://localhost:3000/no-photo.png",
+               }}
+               className="h-64 w-80"
+               placeholder={blurhash}
+               transition={100}
             />
          </Link>
          <Text className="text-xl font-semibold">{clothing.name}</Text>
