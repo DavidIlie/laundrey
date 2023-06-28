@@ -1,8 +1,6 @@
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
-import { RightMenu } from "~/components/Menu";
-
 export default function layout() {
    return (
       <Tabs

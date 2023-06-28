@@ -16,6 +16,14 @@ export const useLoadingStore = create<Store>((set) => ({
    },
 }));
 
+export const LoadingOverlayElement: React.FC = () => {
+   return (
+      <View className="absolute inset-0 z-10 flex h-full w-screen items-center justify-center bg-gray-200/60">
+         <ActivityIndicator size="large" color="#000000" />
+      </View>
+   );
+};
+
 export const LoadingOverlay: React.FC<{ children: React.ReactNode }> = ({
    children,
 }) => {
@@ -25,9 +33,7 @@ export const LoadingOverlay: React.FC<{ children: React.ReactNode }> = ({
 
    return (
       <>
-         <View className="absolute inset-0 z-10 flex h-full w-screen items-center justify-center bg-gray-200/60">
-            <ActivityIndicator size="large" color="#000000" />
-         </View>
+         <LoadingOverlayElement />
          {children}
       </>
    );

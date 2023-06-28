@@ -13,10 +13,6 @@ import { API_KEY } from "~/lib/constants";
 import { LoadingOverlay } from "~/components/LoadingOverlay";
 import { RightMenu } from "~/components/Menu";
 
-export const unstable_settings = {
-   initialRouteName: "app",
-};
-
 const RootLayout = () => {
    const [needApiUrl, setNeedApiUrl] = useState(false);
    const [inputtedApiUrl, setInputtedApiUrl] = useState("");
@@ -97,6 +93,11 @@ const RootLayout = () => {
                         title: "Laundrey",
                      }}
                   >
+                     <Stack.Screen name="(app)" />
+                     <Stack.Screen
+                        name="signin"
+                        options={{ headerShown: false }}
+                     />
                      <Stack.Screen
                         name="profile"
                         options={{ presentation: "modal", title: "Profile" }}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, View } from "react-native";
-import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
 
@@ -9,7 +8,6 @@ import { useSession } from "~/lib/auth";
 import Button from "~/components/Button";
 
 const Profile: React.FC = () => {
-   const router = useRouter();
    const { signOut } = useSession();
    const { colorScheme } = useColorScheme();
    return (
@@ -21,12 +19,7 @@ const Profile: React.FC = () => {
             <Text>{colorScheme === "dark" ? "Light" : "Dark"} Mode</Text>
          </Button>
          <Text className="text-xl font-medium">My Account</Text>
-         <Button
-            onPress={() => {
-               router.push("/");
-               signOut();
-            }}
-         >
+         <Button onPress={() => signOut()}>
             <Text>Log Out</Text>
          </Button>
          <Text className="italic text-gray-500">

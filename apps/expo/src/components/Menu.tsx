@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "expo-router";
 import { useSession } from "~/lib/auth";
 
 export const RightMenu: React.FC = () => {
-   const { user } = useSession();
+   const { user, status } = useSession();
    const router = useRouter();
    const pathname = usePathname();
 
@@ -24,7 +24,9 @@ export const RightMenu: React.FC = () => {
          {isInProfile ? (
             <Text>Close</Text>
          ) : (
-            <UserAvatar size={28} name={user.name} src={user.image} />
+            status === "authenticated" && (
+               <UserAvatar size={28} name={user.name} src={user.image} />
+            )
          )}
       </TouchableOpacity>
    );
