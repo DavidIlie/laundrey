@@ -11,7 +11,6 @@ import * as SecureStore from "expo-secure-store";
 import type { User } from "@laundrey/api/client";
 import type { BaseUser } from "@laundrey/api/src/lib/session-user";
 
-import Button from "~/components/Button";
 import { LoadingOverlayElement } from "~/components/LoadingOverlay";
 import { ACCESS_KEY, API_KEY } from "./constants";
 
