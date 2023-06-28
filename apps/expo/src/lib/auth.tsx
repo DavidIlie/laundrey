@@ -109,8 +109,8 @@ export const UserProvider = (props: UserProviderProps) => {
             setUser(data);
          },
          async signOut() {
-            await SecureStore.deleteItemAsync(ACCESS_KEY);
-            setUser(null);
+            // await SecureStore.deleteItemAsync(ACCESS_KEY);
+            // setUser(null);
             router.push("/signin");
          },
       }),
