@@ -34,7 +34,7 @@ const BrandsModule: React.FC = () => {
             renderItem={(clothing) => <Clothing clothing={clothing.item} />}
          />
          {data.length === 0 && <Text>No clothes...</Text>}
-         <View className="h-24" />
+         <View className="h-28" />
       </ScrollView>
    );
 };
