@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { api } from "~/trpc/client";
+import { revalidateTRPC } from "~/lib/revalidateTRPC";
 
 import { Button } from "@laundrey/ui/button";
 import { Spinner } from "@laundrey/ui/icons";
@@ -19,7 +20,15 @@ const DeleteItem: React.FC<{ id: string }> = ({ id }) => {
             if (!confirm("Are you sure you want to do this?")) return;
             setLoading(true);
             try {
-               await api.laundry.removeItem.mutate({ id });
+               const res = await api.laundry.removeItem.mutate({ id });
+
+               if (res) {
+                  await revalidateTRPC("laundry", "all");
+                  return router.push("/app/laundry");
+               }
+
+               // GET STRANGE UNAUTHORIZED ERROR
+               // await revalidateTRPC("laundry", "get");
                router.refresh();
                setLoading(false);
             } catch (error) {

@@ -8,6 +8,7 @@ import type { z } from "zod";
 
 import type { RouterOutputs } from "~/trpc/client";
 import { api } from "~/trpc/client";
+import { revalidateTRPC } from "~/lib/revalidateTRPC";
 
 import { useZodForm } from "@laundrey/api/form";
 import {
@@ -122,6 +123,7 @@ const CreateForm: React.FC<{
                      }
                      setLoading(false);
                      form.reset();
+                     await revalidateTRPC("clothes", "all");
                      router.push("/app/clothes");
                      toast({
                         title: "Clothing",

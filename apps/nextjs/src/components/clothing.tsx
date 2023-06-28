@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/server-invoker";
 import type { RouterOutputs } from "~/trpc/shared";
 
 import { shimmer } from "@laundrey/ui";

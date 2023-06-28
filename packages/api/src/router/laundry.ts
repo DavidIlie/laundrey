@@ -143,12 +143,15 @@ export const laundryRouter = createTRPCRouter({
 
          if (!laundryEvent) throw new Error("impossible");
 
-         if (laundryEvent.laundryItem.length === 0)
+         if (laundryEvent.laundryItem.length === 0) {
             await ctx.prisma.laundryEvent.delete({
                where: { id: laundryItem.laundryEvent.id },
             });
 
-         return true;
+            return true;
+         }
+
+         return false;
       }),
    finishItem: protectedProcedure
       .input(findByIdValidator)

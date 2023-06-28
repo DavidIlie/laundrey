@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import type { TRPCError } from "@trpc/server";
 
 import { api } from "~/trpc/client";
+import { revalidateTRPC } from "~/lib/revalidateTRPC";
 
 import { useZodForm } from "@laundrey/api/form";
 import { brandAndCategoryValidator } from "@laundrey/api/validators";
@@ -35,7 +35,6 @@ const Sheet: React.FC<{ initial?: Category; children: React.ReactNode }> = ({
 }) => {
    const [loading, setLoading] = useState(false);
    const { toast } = useToast();
-   const router = useRouter();
 
    const form = useZodForm(
       initial
@@ -72,7 +71,7 @@ const Sheet: React.FC<{ initial?: Category; children: React.ReactNode }> = ({
                               await api.categories.create.mutate(values);
                            }
 
-                           router.refresh();
+                           await revalidateTRPC("categories", "all");
 
                            setLoading(false);
                         } catch (error) {

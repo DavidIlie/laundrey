@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
 
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/server-invoker";
 
 import { createLaundryEventName } from "@laundrey/api/client";
 import { getRandomPatternStyle } from "@laundrey/ui";

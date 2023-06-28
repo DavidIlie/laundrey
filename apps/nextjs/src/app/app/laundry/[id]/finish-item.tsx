@@ -23,6 +23,8 @@ const FinishItem: React.FC<{ id: string; returned: Date | null }> = ({
             setLoading(true);
             try {
                await api.laundry.finishItem.mutate({ id });
+               // GET STRANGE UNAUTHORIZED ERROR
+               // await revalidateTRPC("laundry", "get");
                router.refresh();
                setLoading(false);
             } catch (error) {

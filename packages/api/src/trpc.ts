@@ -9,7 +9,7 @@ import { getServerSessionUser, User } from "./lib/session-user";
 
 type CreateContextOptions = {
    headers: Headers;
-   user: User;
+   user: User | null | undefined;
 };
 
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {

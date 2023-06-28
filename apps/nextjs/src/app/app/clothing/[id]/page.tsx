@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/server-invoker";
 import { getServerSession } from "~/lib/getServerSession";
 
 import { prisma } from "@laundrey/db";

@@ -8,6 +8,7 @@ import { format } from "date-fns";
 
 import { api } from "~/trpc/client";
 import type { RouterOutputs } from "~/trpc/shared";
+import { revalidateTRPC } from "~/lib/revalidateTRPC";
 
 import { useZodForm } from "@laundrey/api/form";
 import { laundryEventValidator } from "@laundrey/api/validators";
@@ -65,6 +66,7 @@ const CreateForm: React.FC<{
                setLoading(true);
                try {
                   await api.laundry.create.mutate(values);
+                  await revalidateTRPC("laundry", "all");
                   router.push("/app/laundry");
                   setLoading(false);
                } catch (error) {

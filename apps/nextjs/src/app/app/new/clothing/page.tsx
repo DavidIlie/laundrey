@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/server-invoker";
 
 import AppLayout from "~/app/layout/app-layout";
 import CreateForm from "./create-form";

@@ -1,7 +1,8 @@
 "use server";
 
-import { headers } from "next/headers";
-import { httpBatchLink, loggerLink } from "@trpc/client";
+import { cookies } from "next/headers";
+import { loggerLink } from "@trpc/client";
+import { experimental_nextHttpLink } from "@trpc/next/app-dir/links/nextHttp";
 import { experimental_createTRPCNextAppDirServer } from "@trpc/next/app-dir/server";
 import superjson from "superjson";
 
@@ -19,12 +20,13 @@ export const api = experimental_createTRPCNextAppDirServer<AppRouter>({
                   process.env.NODE_ENV === "development" ||
                   (opts.direction === "down" && opts.result instanceof Error),
             }),
-            httpBatchLink({
+            experimental_nextHttpLink({
+               batch: true,
                url: getUrl(),
                headers() {
                   return {
-                     ...Object.fromEntries(headers()),
-                     "x-trpc-source": "rsc",
+                     cookie: cookies().toString(),
+                     "x-trpc-source": "rsc-http",
                   };
                },
             }),

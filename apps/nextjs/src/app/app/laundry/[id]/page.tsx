@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { formatDistance } from "date-fns";
 
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/server-http";
 import { getServerSession } from "~/lib/getServerSession";
 
 import { createLaundryEventName } from "@laundrey/api/client";
