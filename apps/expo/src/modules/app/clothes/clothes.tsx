@@ -7,7 +7,7 @@ import { api } from "~/lib/api";
 import Button from "~/components/Button";
 import Clothing from "~/components/Clothing";
 
-const BrandsModule: React.FC = () => {
+const ClothesModule: React.FC = () => {
    const { isLoading, data } = api.clothes.all.useQuery();
    const router = useRouter();
 
@@ -20,10 +20,7 @@ const BrandsModule: React.FC = () => {
 
    return (
       <ScrollView className="h-full">
-         <Button
-            className="w-1/4"
-            onPress={() => router.push("/app/new-clothing")}
-         >
+         <Button className="w-1/4" onPress={() => router.push("/new-clothing")}>
             <Text>Add New</Text>
          </Button>
          <View className="h-3" />
@@ -39,4 +36,4 @@ const BrandsModule: React.FC = () => {
    );
 };
 
-export default BrandsModule;
+export default ClothesModule;

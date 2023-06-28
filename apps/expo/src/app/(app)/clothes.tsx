@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import BrandsModule from "~/modules/app/clothes/brands";
+import ClothesModule from "~/modules/app/clothes/clothes";
 
 const Page = () => {
    const [selectedTab, setSelectedTab] = useState(1);
@@ -33,7 +33,7 @@ const Page = () => {
                <Text>Categories</Text>
             </TouchableOpacity>
          </View>
-         <View className="p-2">{selectedTab === 1 && <BrandsModule />}</View>
+         <View className="p-2">{selectedTab === 1 && <ClothesModule />}</View>
       </View>
    );
 };
