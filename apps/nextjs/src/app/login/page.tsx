@@ -20,7 +20,7 @@ const Page = async () => {
    if (session) redirect("/");
 
    return (
-      <div className="flex justify-center flex-grow py-12 sm:px-6 lg:px-8">
+      <div className="flex flex-grow justify-center py-12 sm:px-6 lg:px-8">
          <div className="w-full sm:mx-auto sm:max-w-md">
             <div className="px-2 sm:px-0">
                <h1 className="text-2xl font-medium">Log In</h1>
@@ -28,7 +28,7 @@ const Page = async () => {
                   You need to log in to an account in order to use Laundrey.
                </p>
             </div>
-            <div className="px-4 py-6 mt-2 border-2 shadow dark:border-border dark:bg-container sm:rounded-lg sm:border-l sm:border-r sm:px-10">
+            <div className="mt-2 border-2 px-4 py-6 shadow dark:border-border dark:bg-container sm:rounded-lg sm:border-l sm:border-r sm:px-10">
                <LogInForm />
             </div>
          </div>

@@ -8,7 +8,7 @@ import {
    serverPhotoValidator,
 } from "../../validators";
 import { env } from "../env.mjs";
-import { minio } from "../lib/minio";
+import { createMinio } from "../lib/minio";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 type PresignedURL = PostPolicyResult & {
@@ -72,13 +72,14 @@ export const clothesRouter = createTRPCRouter({
 
          let presignedUrls: PresignedURL[] = [];
 
+         const minio = createMinio();
+
          if (input.photos)
             await Promise.all(
                input.photos?.map(async (_photo, index) => {
                   const policy = minio.newPostPolicy();
                   policy.setKey(photoKeys![index]!);
                   policy.setBucket(env.MINIO_BUCKET);
-
                   const presignedUrl = await minio.presignedPostPolicy(policy);
                   presignedUrls.push({
                      ...presignedUrl,
@@ -126,6 +127,9 @@ export const clothesRouter = createTRPCRouter({
                      `${env.MINIO_PROTOCOL}://${env.MINIO_URL}/${env.MINIO_BUCKET}/`,
                   )[1]!,
             );
+
+            const minio = createMinio();
+
             await minio.removeObjects(env.MINIO_BUCKET, photoKeys);
          }
 

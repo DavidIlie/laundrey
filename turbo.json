@@ -33,8 +33,14 @@
    "globalEnv": [
       "DATABASE_URL",
       "NODE_ENV",
-      "NEXT_PUBLIC_APP_URL",
+      "APP_URL",
       "SKIP_ENV_VALIDATION",
-      "JWT_SECRET"
+      "JWT_SECRET",
+      "MINIO_ACCESS_KEY_ID",
+      "MINIO_SECRET_ACCESS_KEY",
+      "MINIO_BUCKET",
+      "MINIO_URL",
+      "MINIO_PROTOCOL",
+      "MINIO_PORT"
    ]
 }
