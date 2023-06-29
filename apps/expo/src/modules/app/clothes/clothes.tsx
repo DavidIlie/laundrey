@@ -19,8 +19,11 @@ const ClothesModule: React.FC = () => {
       );
 
    return (
-      <ScrollView className="h-full">
-         <Button className="w-1/4" onPress={() => router.push("/new-clothing")}>
+      <ScrollView className="h-full px-2">
+         <Button
+            className="w-[30%]"
+            onPress={() => router.push("/new-clothing")}
+         >
             <Text>Add New</Text>
          </Button>
          <View className="h-3" />

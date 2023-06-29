@@ -8,7 +8,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { TRPCProvider } from "~/lib/api";
 import { UserProvider } from "~/lib/auth";
-import { API_KEY } from "~/lib/constants";
+import { ACCESS_KEY, API_KEY } from "~/lib/constants";
 
 import { LoadingOverlay } from "~/components/LoadingOverlay";
 import { RightMenu } from "~/components/Menu";
@@ -20,6 +20,8 @@ const RootLayout = () => {
 
    useEffect(() => {
       const getData = async () => {
+         // await SecureStore.deleteItemAsync(API_KEY);
+         // await SecureStore.deleteItemAsync(ACCESS_KEY);
          SplashScreen.hideAsync();
          const attempt = await SecureStore.getItemAsync(API_KEY);
          if (attempt) return setApiUrl(attempt);

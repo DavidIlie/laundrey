@@ -53,6 +53,9 @@ importers:
       expo:
         specifier: ^48.0.19
         version: 48.0.19(@babel/core@7.22.5)
+      expo-camera:
+        specifier: ~13.2.1
+        version: 13.2.1(expo@48.0.19)(react@18.2.0)
       expo-constants:
         specifier: ~14.2.1
         version: 14.2.1(expo@48.0.19)
@@ -95,6 +98,9 @@ importers:
       react-native-dialog:
         specifier: ^9.3.0
         version: 9.3.0(react-native@0.71.8)
+      react-native-dropdown-picker:
+        specifier: ^5.4.6
+        version: 5.4.6(react-native@0.71.8)(react@18.2.0)
       react-native-safe-area-context:
         specifier: 4.5.2
         version: 4.5.2(react-native@0.71.8)(react@18.2.0)
@@ -2685,6 +2691,15 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
+
+  /@koale/useworker@4.0.2(react@18.2.0):
+    resolution: {integrity: sha512-xPIPADtom8/3/4FLNj7MvNcBM/Z2FleH85Fdx2O869eoKW8+PoEgtSVvoxWjCWMA46Sm9A5/R1TyzNGc+yM0wg==}
+    peerDependencies:
+      react: ^16.8.0
+    dependencies:
+      dequal: 1.0.1
+      react: 18.2.0
+    dev: false
 
   /@mantine/hooks@6.0.14(react@18.2.0):
     resolution: {integrity: sha512-cBGdTSdBDLcPScoeI12DCWFVzmT4tX+DmI9s+MOBm4IdhF4ogkLbbRgKosFbaBWNKx9WzYAUiQR/tUI5dTkJPQ==}
@@ -6024,6 +6039,11 @@ packages:
       prop-types: 15.8.1
     dev: false
 
+  /dequal@1.0.1:
+    resolution: {integrity: sha512-Fx8jxibzkJX2aJgyfSdLhr9tlRoTnHKrRJuu2XHlAgKioN2j19/Bcbe0d4mFXYZ3+wpE2KVobUVTfDutcD17xQ==}
+    engines: {node: '>=6'}
+    dev: false
+
   /dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
@@ -6618,6 +6638,18 @@ packages:
     transitivePeerDependencies:
       - expo
       - supports-color
+    dev: false
+
+  /expo-camera@13.2.1(expo@48.0.19)(react@18.2.0):
+    resolution: {integrity: sha512-fZdRyF402jJGGmLVlumrLcr5Em9+Y2SO1MIlxLBtHXnybyHbTRMRAbzVapKX1Aryfujqadh+Kl+sdsWYkMuJjg==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@koale/useworker': 4.0.2(react@18.2.0)
+      expo: 48.0.19(@babel/core@7.22.5)
+      invariant: 2.2.4
+    transitivePeerDependencies:
+      - react
     dev: false
 
   /expo-constants@14.2.1(expo@48.0.19):
@@ -10557,6 +10589,16 @@ packages:
     peerDependencies:
       react-native: '>=0.63.0'
     dependencies:
+      react-native: 0.71.8(@babel/core@7.22.5)(@babel/preset-env@7.22.4)(react@18.2.0)
+    dev: false
+
+  /react-native-dropdown-picker@5.4.6(react-native@0.71.8)(react@18.2.0):
+    resolution: {integrity: sha512-T1XBHbE++M6aRU3wFYw3MvcOuabhWZ29RK/Ivdls2r1ZkZ62iEBZknLUPeVLMX3x6iUxj4Zgr3X2DGlEGXeHsA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+    dependencies:
+      react: 18.2.0
       react-native: 0.71.8(@babel/core@7.22.5)(@babel/preset-env@7.22.4)(react@18.2.0)
     dev: false
 

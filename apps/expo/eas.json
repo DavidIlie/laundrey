@@ -25,5 +25,15 @@
    },
    "submit": {
       "production": {}
+   },
+   "expo": {
+      "plugins": [
+         [
+            "expo-camera",
+            {
+               "cameraPermission": "Allow Laundrey to access your camera."
+            }
+         ]
+      ]
    }
 }
