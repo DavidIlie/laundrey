@@ -37,6 +37,17 @@ const ACCEPTED_IMAGE_TYPES = [
    "image/heif",
 ];
 
+export const appPhotoValidator = z.object({
+   photos: z
+      .array(
+         z.object({
+            fileName: z.string(),
+            uri: z.string(),
+         }),
+      )
+      .optional(),
+});
+
 export const clientPhotoValidator = z.object({
    photos: z
       .array(z.custom<File>())

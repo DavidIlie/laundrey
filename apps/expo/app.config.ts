@@ -32,7 +32,22 @@ const defineConfig = (): ExpoConfig => ({
          // projectId: "your-project-id",
       },
    },
-   plugins: ["./expo-plugins/with-modify-gradle.js"],
+   plugins: [
+      "./expo-plugins/with-modify-gradle.js",
+      [
+         "expo-image-picker",
+         {
+            photosPermission:
+               "The app accesses your photos to add clothing items",
+         },
+      ],
+      [
+         "expo-camera",
+         {
+            cameraPermission: "Allow Laundrey to access your camera.",
+         },
+      ],
+   ],
 });
 
 export default defineConfig;

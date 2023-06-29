@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Dialog from "react-native-dialog";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import Constants from "expo-constants";
 import { SplashScreen, Stack } from "expo-router";
 import * as SecureStore from "expo-secure-store";
@@ -89,22 +90,24 @@ const RootLayout = () => {
          <LoadingOverlay>
             <UserProvider>
                <SafeAreaProvider>
-                  <Stack
-                     screenOptions={{
-                        headerRight: RightMenu,
-                        title: "Laundrey",
-                     }}
-                  >
-                     <Stack.Screen name="(app)" />
-                     <Stack.Screen
-                        name="signin"
-                        options={{ headerShown: false }}
-                     />
-                     <Stack.Screen
-                        name="profile"
-                        options={{ presentation: "modal", title: "Profile" }}
-                     />
-                  </Stack>
+                  <ActionSheetProvider>
+                     <Stack
+                        screenOptions={{
+                           headerRight: RightMenu,
+                           title: "Laundrey",
+                        }}
+                     >
+                        <Stack.Screen name="(app)" />
+                        <Stack.Screen
+                           name="signin"
+                           options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                           name="profile"
+                           options={{ presentation: "modal", title: "Profile" }}
+                        />
+                     </Stack>
+                  </ActionSheetProvider>
                   <StatusBar />
                </SafeAreaProvider>
             </UserProvider>
